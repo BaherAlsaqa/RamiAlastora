@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="leagues_list">
+        <item>الدوري الاسباني</item>
+        <item>الدوري الانجليزي</item>
+        <item>كاس اسيا</item>
+        <item>كاس افريقيا</item>
+        <item>كاس اوروبا</item>
+        <item>دوري الابطال</item>
+    </string-array>
+</resources>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/height60dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:id="@+id/cl_scorer">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/custom_ripple">
+
+        <ImageView
+            android:id="@+id/playerimage"
+            android:layout_width="@dimen/imagewidthheight35dp"
+            android:layout_height="@dimen/imagewidthheight35dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/sort"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/player1" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/sort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="1"
+            android:textColor="@color/gray_dark"
+            android:textSize="@dimen/text12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/playername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="11dp"
+            android:lines="1"
+            android:text="كريم بنزيما"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/text13sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/playerimage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/playercenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:lines="1"
+            android:text="كريم بنزيما"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text11sp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toEndOf="@+id/playerimage"
+            app:layout_constraintTop_toBottomOf="@+id/playername" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/falsepenalties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="32dp"
+            android:text="0"
+            android:textColor="@color/xred"
+            android:textSize="@dimen/text12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/truepenalties"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:text="0"
+            android:textColor="@color/bluegreen"
+            android:textSize="@dimen/text12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/falsepenalties"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/playergoals"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:text="0"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/text12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/truepenalties"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/yellowcard"
+            android:layout_width="@dimen/wightcard14dp"
+            android:layout_height="@dimen/height20dp"
+            android:layout_marginEnd="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/playergoals"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/yellow_card" />
+
+        <ImageView
+            android:id="@+id/redcard"
+            android:layout_width="@dimen/wightcard14dp"
+            android:layout_height="@dimen/height20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="34dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/playergoals"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/red_card" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@drawable/ic_main"
+            android:title="@string/menu_main" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_notifications"
+            android:title="@string/menu_notification" />
+        <item
+            android:id="@+id/nav_favorite"
+            android:icon="@drawable/ic_favorites"
+            android:title="@string/menu_favotire" />
+        <item
+            android:id="@+id/nav_scorer"
+            android:icon="@drawable/ic_scorers"
+            android:title="@string/menu_scorer" />
+        <item
+            android:id="@+id/nav_league"
+            android:icon="@drawable/ic_leagues"
+            android:title="@string/menu_league" />
+        <item
+            android:id="@+id/nav_latest_news"
+            android:icon="@drawable/ic_latest_news"
+            android:title="@string/menu_latest_news" />
+        <!--<item
+            android:id="@+id/nav_setting"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/menu_settings" />-->
+    </group>
+
+    <item android:title="@string/socialmedia">
+        <menu>
+            <item
+                android:id="@+id/nav_facebook"
+                android:icon="@drawable/ic_facebook"
+                android:title="@string/menu_facebook" />
+            <item
+                android:id="@+id/nav_twitter"
+                android:icon="@drawable/ic_twitter"
+                android:title="@string/menu_twitter" />
+        </menu>
+    </item>
+    <item android:title="@string/logout">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/ic_logout"
+                android:title="@string/logout" />
+        </menu>
+    </item>
+
+</menu>

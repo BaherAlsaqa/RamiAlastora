@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "141182913577",
+    "firebase_url": "https://ramialastora.firebaseio.com",
+    "project_id": "ramialastora",
+    "storage_bucket": "ramialastora.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141182913577:android:af5dca095173b4d34e2038",
+        "android_client_info": {
+          "package_name": "com.ramialastora.ramialastora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "141182913577-co76nnpieoqhepig6dl19gp1jclnnkak.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ramialastora.ramialastora",
+            "certificate_hash": "83419b5f5ac091270b8c0c8a94e72ec998ea9849"
+          }
+        },
+        {
+          "client_id": "141182913577-0tkbq9pjobqpgplothd0mtbvqm299c94.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQPraEA3kj8YsvrHn5QSx7gU7ZoDeeQI4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "141182913577-0tkbq9pjobqpgplothd0mtbvqm299c94.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".RamiFragments.PlayerDetails"
+    android:id="@+id/constraintlayout">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/playerimage"
+        android:layout_width="51dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="20dp"
+        android:src="@drawable/players_holder"
+        app:civ_border_color="@color/gray3"
+        app:civ_border_overlay="true"
+        app:civ_border_width="@dimen/width1dp"
+        app:civ_circle_background_color="@color/text_gray2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/teamimage2"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/leagues_teams_holder"
+        app:civ_border_color="@color/gray3"
+        app:civ_border_overlay="true"
+        app:civ_border_width="@dimen/width1dp"
+        app:civ_circle_background_color="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/teamimage1"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/leagues_teams_holder"
+        app:civ_border_color="@color/gray3"
+        app:civ_border_overlay="true"
+        app:civ_border_width="@dimen/width1dp"
+        app:civ_circle_background_color="@color/white"
+        app:layout_constraintEnd_toStartOf="@+id/teamimage2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        android:id="@+id/playername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text=""
+        android:textColor="@color/dark_green"
+        android:textSize="@dimen/text16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/playerimage"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        android:id="@+id/playerage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:text=""
+        android:textColor="@color/text_gray"
+        android:textSize="@dimen/text12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/playerimage"
+        app:layout_constraintTop_toBottomOf="@+id/playername" />
+
+    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        android:id="@+id/playercenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:text=""
+        android:textColor="@color/blue"
+        android:textSize="@dimen/text12sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/view15"
+        app:layout_constraintTop_toBottomOf="@+id/playername" />
+
+    <View
+        android:id="@+id/view15"
+        android:layout_width="4dp"
+        android:layout_height="4dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/background_point_player_details"
+        app:layout_constraintBottom_toBottomOf="@+id/playerage"
+        app:layout_constraintStart_toEndOf="@+id/playerage"
+        app:layout_constraintTop_toTopOf="@+id/playerage" />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark"
+        app:elevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playernumber">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_gravity="center"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/colorAccent"
+                app:tabIndicatorHeight="3dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorAccent"
+                app:tabTextColor="@color/colorAccent" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.ramialastora.ramialastora.CustomViews.CustomTextView
+        android:id="@+id/playernumber"
+        android:layout_width="@dimen/width20dp"
+        android:layout_height="@dimen/height20dp"
+        android:layout_marginTop="43dp"
+        android:background="@drawable/background_player_number"
+        android:gravity="center"
+        android:text=""
+        android:textColor="@color/white"
+        android:textSize="@dimen/text12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/playerimage"
+        app:layout_constraintStart_toStartOf="@+id/playerimage"
+        app:layout_constraintTop_toTopOf="@+id/playerimage" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar" />
+
+    <com.wang.avi.AVLoadingIndicatorView
+        android:id="@+id/avi"
+        style="@style/AVLoadingIndicatorView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:indicatorColor="@color/colorAccent"
+        app:indicatorName="BallZigZagIndicator"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/nointernet"
+        layout="@layout/no_internet_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/emptydata"
+        layout="@layout/empty_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/error"
+        layout="@layout/error_layout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

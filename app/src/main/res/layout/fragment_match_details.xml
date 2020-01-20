@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RamiFragments.MatchDetailsFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/height200dp"
+        android:background="@drawable/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <FrameLayout
+            android:id="@+id/underwayframlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_constraintEnd_toStartOf="@+id/remainingtime"
+            app:layout_constraintTop_toTopOf="@+id/time">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="6dp"
+                android:layout_height="6dp"
+                android:layout_gravity="center"
+                app:srcCompat="@drawable/dot_to_animation" />
+
+            <com.github.ybq.android.spinkit.SpinKitView
+                android:id="@+id/statusicon"
+                style="@style/SpinKitView.Large.PulseRing"
+                android:layout_width="@dimen/widthicon16dp"
+                android:layout_height="@dimen/widthicon16dp"
+                android:layout_gravity="center"
+                app:SpinKit_Color="@color/bluegreen" />
+        </FrameLayout>
+
+        <ImageView
+            android:id="@+id/team1image"
+            android:layout_width="@dimen/imagewidth44dp"
+            android:layout_height="@dimen/heightimage59dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginRight="50dp"
+            android:src="@drawable/team3"
+            app:layout_constraintBottom_toTopOf="@+id/app_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.68" />
+
+        <ImageView
+            android:id="@+id/team2image"
+            android:layout_width="@dimen/imagewidth44dp"
+            android:layout_height="@dimen/heightimage59dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginEnd="50dp"
+            android:src="@drawable/team3"
+            app:layout_constraintBottom_toTopOf="@+id/app_bar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.682" />
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark"
+            app:elevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways">
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tabs"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_gravity="center"
+                    app:tabGravity="fill"
+                    app:tabIndicatorColor="@color/colorAccent"
+                    app:tabIndicatorHeight="3dp"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/colorAccent"
+                    app:tabTextColor="@color/colorAccent" />
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/teamname1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="اتلتكو مدريد"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/text11sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/team1image"
+            app:layout_constraintStart_toStartOf="@+id/team1image"
+            app:layout_constraintTop_toBottomOf="@+id/team1image" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/teamname2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="اتلتكو مدريد"
+            android:textColor="@color/dark_green"
+            android:textSize="@dimen/text11sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/team2image"
+            app:layout_constraintStart_toStartOf="@+id/team2image"
+            app:layout_constraintTop_toBottomOf="@+id/team2image" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/leaguename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:lines="1"
+            android:text="دوري أبطال أوروبا النهائي"
+            android:textColor="@color/dark_green"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/leagueimage"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:lines="1"
+            android:text="02:00 مساء"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/remainingtime"
+            app:layout_constraintEnd_toEndOf="@+id/remainingtime"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="@+id/remainingtime" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/remainingtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:text="متبقي 4 أيام"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="@dimen/margintop3dp"
+            app:layout_constraintBottom_toTopOf="@+id/teamname1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/playground"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:lines="1"
+            android:text="ملعب سان ماميس"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/text11sp"
+            android:layout_marginTop="@dimen/margintop3dp"
+            app:layout_constraintEnd_toEndOf="@+id/leaguename"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/leaguename"
+            app:layout_constraintTop_toBottomOf="@+id/leaguename" />
+
+        <ImageView
+            android:id="@+id/leagueimage"
+            android:layout_width="@dimen/width20dp"
+            android:layout_height="@dimen/width20dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/league_1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout5" />
+</androidx.constraintlayout.widget.ConstraintLayout>
