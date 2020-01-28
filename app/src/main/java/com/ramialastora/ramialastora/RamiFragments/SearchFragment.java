@@ -27,6 +27,7 @@ import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MySearchLeagueAdapter;
 import com.ramialastora.ramialastora.adapters.MySearchPlayerAdapter;
 import com.ramialastora.ramialastora.adapters.MySearchTeamAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.search.League;
 import com.ramialastora.ramialastora.classes.responses.search.Player;
 import com.ramialastora.ramialastora.classes.responses.search.SearchBody;
@@ -108,6 +109,8 @@ public class SearchFragment extends Fragment {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
         appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_search_banner), view);
 
         teamList = new ArrayList<>();
         playerList = new ArrayList<>();

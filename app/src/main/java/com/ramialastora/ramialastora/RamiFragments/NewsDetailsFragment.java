@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyRecommendedNewsAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.news.NewsData;
 import com.ramialastora.ramialastora.classes.responses.news.OneNewsBody;
 import com.ramialastora.ramialastora.classes.responses.news.RelatedNews;
@@ -112,6 +113,8 @@ public class NewsDetailsFragment extends Fragment {
         ////////////////////////////
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_news_details_banner), view);
 
         if (getArguments() != null) {
             newsData = (NewsData) getArguments().getParcelable(Constants.newsData);

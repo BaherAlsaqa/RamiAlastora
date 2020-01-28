@@ -360,7 +360,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
             } else {
                 sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
             }
-        }else if (close == 1){
+        } else if (close == 1) {
             sheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         }
     }
@@ -466,14 +466,14 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                 Log.d(Constants.Log + "back", "case R.id.action_back_dark: || Main");
                 String back = appSharedPreferences.readString(Constants.backFragmentCurrent);
                 if (back.equalsIgnoreCase(Constants.mainF)) {
-                    Log.d(Constants.Log+"menuteam", "(Constants.mainF)");
+                    Log.d(Constants.Log + "menuteam", "(Constants.mainF)");
                     onBackPressed();
                     menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
                     badgeandCheckedDrawer();
                     changeToolbarBackground(R.drawable.back_toolbar);
                     drawerIcon(R.drawable.ic_menu);
                 } else if (back.equalsIgnoreCase(Constants.leagueF)) {
-                    Log.d(Constants.Log+"menuteam", "(Constants.leagueF)");
+                    Log.d(Constants.Log + "menuteam", "(Constants.leagueF)");
                     getSupportFragmentManager().popBackStack(null,
                             FragmentManager.POP_BACK_STACK_INCLUSIVE);//Clear from back stack
                     fragmentTransaction = getSupportFragmentManager().beginTransaction();
@@ -486,14 +486,14 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                     changeToolbarBackground(R.color.white);
                     drawerIcon(R.drawable.ic_menu_dark);
                 } else if (back.equalsIgnoreCase(Constants.teamF)) {
-                    Log.d(Constants.Log+"menuteam", "(Constants.teamF)");
+                    Log.d(Constants.Log + "menuteam", "(Constants.teamF)");
                     onBackPressed();
                     menuBackIcon(R.menu.toolbar_back, 0, PLAYER_OR_TEAM_NAME, 3);
                     badgeandCheckedDrawer();
                     changeToolbarBackground(R.drawable.back_team_up);
                     drawerIcon(R.drawable.ic_menu);
                 } else if (back.equalsIgnoreCase(Constants.playerF)) {
-                    Log.d(Constants.Log+"menuteam", "(Constants.playerF)");
+                    Log.d(Constants.Log + "menuteam", "(Constants.playerF)");
                     onBackPressed();
                     if (FROM_BACK.equals(Constants.search)) {
                         menuBackIcon(R.menu.toolbar_back, R.string.search, "", 0);
@@ -505,7 +505,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                     changeToolbarBackground(R.drawable.back_toolbar);
                     drawerIcon(R.drawable.ic_menu);
                 } else {
-                    Log.d(Constants.Log+"menuteam", "(else)");
+                    Log.d(Constants.Log + "menuteam", "(else)");
                     onBackPressed();
                     toolbar.getMenu().clear();
                     toolbar.inflateMenu(R.menu.toolbar_back);

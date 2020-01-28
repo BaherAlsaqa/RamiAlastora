@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -116,7 +115,7 @@ public class FavoriteItemsFragment extends Fragment {
         adapter.setOnClickListener(new OnItemClickListener6() {
             @Override
             public void onItemClick(Favorite item) {
-                Toast.makeText(getContext(), item.getName(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), item.getName(), Toast.LENGTH_SHORT).show();
             }
         });
 

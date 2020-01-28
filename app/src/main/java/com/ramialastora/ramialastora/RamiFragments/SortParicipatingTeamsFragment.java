@@ -23,6 +23,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyParticipatingTeamsPaginationAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.participating_teams.Data;
 import com.ramialastora.ramialastora.classes.responses.participating_teams.ParticipatingTeamsBody;
 import com.ramialastora.ramialastora.classes.responses.participating_teams.ParticipatingTeamsData;
@@ -130,11 +131,9 @@ public class SortParicipatingTeamsFragment extends Fragment {
         });
 
         //Initializing
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
-        }else{
-            appSharedPreferences = new AppSharedPreferences(getContext());
-        }
+        appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_participating_team_banner), view);
 
         //TODO //////////////////// start pagination code and settings////////////////////////////////////
         isLoading = false;

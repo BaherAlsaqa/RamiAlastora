@@ -14,6 +14,9 @@ import com.google.android.gms.ads.initialization.InitializationStatus;
 import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.interfaces.Constants;
+import com.ramialastora.ramialastora.utils.AppSharedPreferences;
+
+//Created by Baher Alsaqa
 
 public interface MobileAdsInterface {
 
@@ -27,31 +30,23 @@ public interface MobileAdsInterface {
             }
         });
         adView = view.findViewById(R.id.adView);
+        adView.setVisibility(View.VISIBLE);
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
 
     }
 
-    static void interstitialAds(Context context, int onClick, String adsKey) {
-        InterstitialAd mInterstitialAd;
+    static InterstitialAd interstitialAds(Context context, int onClick, String adsKey) {
+
         MobileAds.initialize(context, new OnInitializationCompleteListener() {
             @Override
             public void onInitializationComplete(InitializationStatus initializationStatus) {
             }
         });
-        mInterstitialAd = new InterstitialAd(context);
+        InterstitialAd mInterstitialAd = new InterstitialAd(context);
         mInterstitialAd.setAdUnitId(adsKey);
 
         mInterstitialAd.loadAd(new AdRequest.Builder().build());
-
-        if (onClick == 1) {
-            if (mInterstitialAd.isLoaded()) {
-                Log.d(Constants.Log+"onclick", "The interstitial is loaded");
-                mInterstitialAd.show();
-            } else {
-                Log.d(Constants.Log+"onclick", "The interstitial wasn't loaded yet.");
-            }
-        }
 
         mInterstitialAd.setAdListener(new AdListener() {
             @Override
@@ -85,7 +80,27 @@ public interface MobileAdsInterface {
             }
         });
 
+        return mInterstitialAd;
+    }
 
+    static void showInterstitialAd(InterstitialAd interstitialAd, Context context){
+        AppSharedPreferences appSharedPreferences = new AppSharedPreferences(context);
+        int x = appSharedPreferences.readInteger(Constants.count_ads);
+        Log.d(Constants.Log + "7", "x = " + x);
+        appSharedPreferences.writeInteger(Constants.count_ads, x + 1);
+        x = appSharedPreferences.readInteger(Constants.count_ads);
+        if (x==1 | x==5) {
+            // Show Interstitial Ads
+            if (interstitialAd.isLoaded()) {
+                Log.d(Constants.Log + "onclick", "The interstitial is loaded");
+                interstitialAd.show();
+            } else {
+                Log.d(Constants.Log + "onclick", "The interstitial wasn't loaded yet.");
+            }
+        }else if (x>=9){
+            Log.d("log" + "131", "x = "+x);
+            appSharedPreferences.writeInteger(Constants.count_ads, 0);
+        }
     }
 
 }

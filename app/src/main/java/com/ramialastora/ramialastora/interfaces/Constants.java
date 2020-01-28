@@ -67,4 +67,5 @@ public interface Constants {
     String teamF = "TEAM_FRAGMENT";
     String playerDetails = "PLAYER_DETAILS";
     String search = "SEARCH";
+    String count_ads = "COUNT_ADS";
 }

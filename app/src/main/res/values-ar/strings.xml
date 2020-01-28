@@ -94,4 +94,17 @@
     <string name="sort_title">ت</string>
 <!--    <string name="rami_main_banner">ca-app-pub-1064539523810191/7767011825</string>-->
     <string name="rami_main_banner">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="main_fragment_inter">ca-app-pub-1064539523810191/4074995045</string>
+    <string name="fragment_notification_banner">ca-app-pub-1064539523810191/1183192101</string>
+    <string name="fragment_favorite_banner">ca-app-pub-1064539523810191/6103705662</string>
+    <string name="fragment_scorers_banner">ca-app-pub-1064539523810191/1301492043</string>
+    <string name="fragment_leagues_banner">ca-app-pub-1064539523810191/6942144612</string>
+    <string name="fragment_news_banner">ca-app-pub-1064539523810191/8578659915</string>
+    <string name="fragment_league_details_banner">ca-app-pub-1064539523810191/9967763208</string>
+    <string name="fragment_match_details_banner">ca-app-pub-1064539523810191/7420177834</string>
+    <string name="fragment_news_details_banner">ca-app-pub-1064539523810191/2013892196</string>
+    <string name="fragment_player_details_banner">ca-app-pub-1064539523810191/4803707067</string>
+    <string name="fragment_search_banner">ca-app-pub-1064539523810191/2906217750</string>
+    <string name="fragment_team_details_banner">ca-app-pub-1064539523810191/7053346329</string>
+    <string name="fragment_participating_team_banner">ca-app-pub-1064539523810191/6343378810</string>
 </resources>

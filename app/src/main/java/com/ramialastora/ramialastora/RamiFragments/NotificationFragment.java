@@ -25,6 +25,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyNotificationPaginationAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.notifications.Data;
 import com.ramialastora.ramialastora.classes.responses.notifications.NotificationBody;
 import com.ramialastora.ramialastora.classes.responses.notifications.NotificationData;
@@ -105,6 +106,8 @@ public class NotificationFragment extends Fragment {
 
         //Initializing
         appSharedPreferences = new AppSharedPreferences(getContext());
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_notification_banner), view);
 
         //TODO //////////////////// start pagination code and settings////////////////////////////////////
         isLoading = false;

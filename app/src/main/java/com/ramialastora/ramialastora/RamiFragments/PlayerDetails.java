@@ -30,6 +30,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.players_details.ParticipatingLeague;
 import com.ramialastora.ramialastora.classes.responses.players_details.PlayerDetailsBody;
 import com.ramialastora.ramialastora.interfaces.Constants;
@@ -122,6 +123,8 @@ public class PlayerDetails extends Fragment {
 
         apiInterface = APIClient.getClient().create(APIInterface.class);
         appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_player_details_banner), view);
 
         constraintLayout.setOnClickListener(new View.OnClickListener() {
             @Override

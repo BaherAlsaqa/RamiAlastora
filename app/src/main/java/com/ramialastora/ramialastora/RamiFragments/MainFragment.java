@@ -17,6 +17,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.tabs.TabLayout;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
@@ -106,10 +107,12 @@ public class MainFragment extends Fragment {
                 getFragmentManager().popBackStackImmediate();
             }
         });
-
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.main_fragment_inter));
         clChangeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                 ((RamiMain) Objects.requireNonNull(getActivity())).expandCloseSheet(0);
             }
         });

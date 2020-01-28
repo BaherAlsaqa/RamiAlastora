@@ -27,6 +27,7 @@ import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyNewsPaginationAdapter;
 import com.ramialastora.ramialastora.adapters.MyTeamsPaginationAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.news.Data;
 import com.ramialastora.ramialastora.classes.responses.news.NewsBody;
 import com.ramialastora.ramialastora.classes.responses.news.NewsData;
@@ -135,7 +136,9 @@ public class LatestNewsFragment extends Fragment {
         error = view.findViewById(R.id.error);
 
         //Initializing
-        appSharedPreferences = new AppSharedPreferences(getContext());
+        appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_news_banner), view);
 
         //TODO //////////////////// Start pagination code and settings////////////////////////////////////
         isLoading = false;

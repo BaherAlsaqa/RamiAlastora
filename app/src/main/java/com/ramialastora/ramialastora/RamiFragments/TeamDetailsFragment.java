@@ -22,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.UserResp;
 import com.ramialastora.ramialastora.interfaces.Constants;
 import com.ramialastora.ramialastora.retrofit.APIClient;
@@ -108,6 +109,8 @@ public class TeamDetailsFragment extends Fragment {
         //Initialization
         apiInterface = APIClient.getClient().create(APIInterface.class);
         appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_team_details_banner), view);
 
         int userId = appSharedPreferences.readInteger(Constants.userid);
 

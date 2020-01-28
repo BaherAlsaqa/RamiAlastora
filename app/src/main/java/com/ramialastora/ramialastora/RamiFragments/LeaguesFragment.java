@@ -29,6 +29,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyLeaguesPaginationAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.leagues.Data;
 import com.ramialastora.ramialastora.classes.responses.leagues.LeagueBody;
 import com.ramialastora.ramialastora.classes.responses.leagues.LeagueData;
@@ -117,7 +118,9 @@ public class LeaguesFragment extends Fragment {
         etSearch = view.findViewById(R.id.search);
 
         //Initializing
-        appSharedPreferences = new AppSharedPreferences(getContext());
+        appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_leagues_banner), view);
 
         //TODO //////////////////// start pagination code and settings////////////////////////////////////
         isLoading = false;

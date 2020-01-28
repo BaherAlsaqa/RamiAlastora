@@ -31,6 +31,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.matches.MatchData;
 import com.ramialastora.ramialastora.interfaces.Constants;
 import com.ramialastora.ramialastora.utils.AppSharedPreferences;
@@ -99,7 +100,9 @@ public class MatchDetailsFragment extends Fragment {
         underwayFramLayout = view.findViewById(R.id.underwayframlayout);
 
         //Initializing
-        appSharedPreferences = new AppSharedPreferences(getContext());
+        appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+
+        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_match_details_banner), view);
 
         if (getArguments() != null) {
             matchData = (MatchData) getArguments().getParcelable(Constants.matchdata);
