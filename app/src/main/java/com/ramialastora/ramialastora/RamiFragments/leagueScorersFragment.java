@@ -25,9 +25,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyScorersPaginationAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.players_details.ParticipatingLeague;
 import com.ramialastora.ramialastora.classes.responses.scorers.Data;
 import com.ramialastora.ramialastora.classes.responses.scorers.ScorersBody;
@@ -198,6 +200,9 @@ public class leagueScorersFragment extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_league_scorers_inter));
+
         adapter.setOnClickListener(new OnItemClickListener7() {
             @Override
             public void onItemClick(ScorersData item) {
@@ -208,6 +213,8 @@ public class leagueScorersFragment extends Fragment {
                 fragmentTransaction.replace(R.id.nav_host_fragment, PlayerDetails.newInstance(leagueId, item.getPlayerId(), 0));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

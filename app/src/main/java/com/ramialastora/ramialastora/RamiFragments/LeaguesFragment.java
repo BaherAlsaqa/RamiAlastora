@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyLeaguesPaginationAdapter;
@@ -143,6 +144,9 @@ public class LeaguesFragment extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_leagues_inter));
+
         adapter.setOnClickListener(new OnItemClickListener4() {
             @Override
             public void onItemClick(LeagueData item) {
@@ -160,12 +164,14 @@ public class LeaguesFragment extends Fragment {
                     }else if (scorersOrPTeams.equals(Constants.pTeams)){
                         Log.d(Constants.Log+"league", "(scorersOrPTeams.equals(Constants.pTeams))");
                         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                        //type == 1 from leagues fragment to view banner ads;
                         fragmentTransaction.replace(R.id.nav_host_fragment, SortParicipatingTeamsFragment.
-                                newInstance(1, item.getTitle(), item.getLeaguesActive().get(0).getId(), 0, 0));
+                                newInstance(1,1, item.getTitle(), item.getLeaguesActive().get(0).getId(), 0, 0));
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();
                     }
                 }
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

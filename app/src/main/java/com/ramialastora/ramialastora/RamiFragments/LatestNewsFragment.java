@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyNewsPaginationAdapter;
@@ -162,10 +163,15 @@ public class LatestNewsFragment extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(newsAdapter);
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_latest_news_inter));
+
         newsAdapter.setOnClickListener(new OnItemClickListener1() {
             @Override
             public void onItemClick(NewsData item) {
                 openFragmentDetails(item);
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 
@@ -236,6 +242,8 @@ public class LatestNewsFragment extends Fragment {
                 newsType = 2;
                 teamId = item.getTeamId();
                 loadFirstPage();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

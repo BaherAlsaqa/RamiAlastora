@@ -19,8 +19,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.adapters.MyMatchesPaginationAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.matches.BodyData;
 import com.ramialastora.ramialastora.classes.responses.matches.Data;
 import com.ramialastora.ramialastora.classes.responses.matches.MatchData;
@@ -210,6 +212,9 @@ public class TodayMatches extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_today_matches_inter));
+
         adapter.setOnClickListener(new OnItemClickListener5() {
             @Override
             public void onItemClick(MatchData item) {
@@ -220,6 +225,8 @@ public class TodayMatches extends Fragment {
                 fragmentTransaction.replace(R.id.nav_host_fragment, MatchDetailsFragment.newInstance(item));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 
@@ -235,6 +242,8 @@ public class TodayMatches extends Fragment {
                         item, 1, "", "", 0));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

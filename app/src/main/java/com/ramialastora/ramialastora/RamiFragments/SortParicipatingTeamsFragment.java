@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyParticipatingTeamsPaginationAdapter;
@@ -67,13 +68,13 @@ public class SortParicipatingTeamsFragment extends Fragment {
     private int TOTAL_PAGES = 2;
     private int currentPage = PAGE_START;
     AppSharedPreferences appSharedPreferences;
-    private int userId, leagueId, backButton;
+    private int userId, leagueId, backButton, type;
     private String leagueName;
     public static int TEAM_ID1 = 0;
     public static int TEAM_ID2 = 0;
     private ConstraintLayout cLayout;
 
-    public static SortParicipatingTeamsFragment newInstance(int backButton, String leagueName, int leagueId, int teamId1, int teamId2) {
+    public static SortParicipatingTeamsFragment newInstance(int type, int backButton, String leagueName, int leagueId, int teamId1, int teamId2) {
         SortParicipatingTeamsFragment fragment = new SortParicipatingTeamsFragment();
         Bundle args = new Bundle();
         args.putString(Constants.leagueName, leagueName);
@@ -81,6 +82,7 @@ public class SortParicipatingTeamsFragment extends Fragment {
         args.putInt(Constants.leagueId, leagueId);
         args.putInt(Constants.teamId1, teamId1);
         args.putInt(Constants.teamId2, teamId2);
+        args.putInt(Constants.type, type);
         fragment.setArguments(args);
         return fragment;
     }
@@ -95,6 +97,7 @@ public class SortParicipatingTeamsFragment extends Fragment {
             leagueId = getArguments().getInt(Constants.leagueId);
             TEAM_ID1 = getArguments().getInt(Constants.teamId1);
             TEAM_ID2 = getArguments().getInt(Constants.teamId2);
+            type = getArguments().getInt(Constants.type);
             Log.d(Constants.Log+"pteam", "league name = "+leagueName+" league id = "+
                     leagueId+"team id1 = "+TEAM_ID1+" team id2 = "+TEAM_ID2);
         }
@@ -133,7 +136,8 @@ public class SortParicipatingTeamsFragment extends Fragment {
         //Initializing
         appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
 
-        MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_participating_team_banner), view);
+        if (type == 1)
+            MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_participating_team_banner), view);
 
         //TODO //////////////////// start pagination code and settings////////////////////////////////////
         isLoading = false;
@@ -156,6 +160,9 @@ public class SortParicipatingTeamsFragment extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_sort_participating_teams_inter));
+
         adapter.setOnClickListener(new OnItemClickListener3() {
             @Override
             public void onItemClick(ParticipatingTeamsData item) {
@@ -170,6 +177,8 @@ public class SortParicipatingTeamsFragment extends Fragment {
                         .newInstance(item.getFavorite(), item.getTemaId(), item.getName(), item.getLogo(), item.getCountry(), leagueName, leagueId));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

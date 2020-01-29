@@ -13,8 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.OutLink;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.interfaces.Constants;
 import com.ramialastora.ramialastora.utils.AppSharedPreferences;
 
@@ -145,6 +147,9 @@ public class DetailsMatchDetailsFragment extends Fragment {
         String currentDateandDay = matchesDate + " / " + day;
         matchDate.setText(currentDateandDay);
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_details_match_details_inter));
+
         if (urlLiveVideo != null) {
             if (!urlLiveVideo.equalsIgnoreCase("")) {
                 live.setVisibility(View.VISIBLE);
@@ -153,6 +158,7 @@ public class DetailsMatchDetailsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getContext(), OutLink.class).putExtra(Constants.link, urlLiveVideo));
+                        MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                         /*FragmentTransaction fragmentTransaction = null;
                         fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.nav_host_fragment, WebViewVideo.newInstance(urlLiveVideo));
@@ -176,6 +182,8 @@ public class DetailsMatchDetailsFragment extends Fragment {
                     @Override
                     public void onClick(View v) {
                         startActivity(new Intent(getContext(), OutLink.class).putExtra(Constants.link, urlVideoValue));
+
+                        MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                         /*FragmentTransaction fragmentTransaction = null;
                         fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.nav_host_fragment, WebViewVideo.newInstance(urlVideoValue));

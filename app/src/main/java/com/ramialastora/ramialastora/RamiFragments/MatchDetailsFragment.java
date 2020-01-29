@@ -305,7 +305,7 @@ public class MatchDetailsFragment extends Fragment {
         // type 1 = team details news , but type 2 = match news, but type 3 = league details news;
         adapter.addFrag(TeamLatestNewsFragment.newInstance(2, matchData.getFirstTeam().getId(),
                 matchData.getSecondTeam().getId(), 0), getString(R.string.news));
-        adapter.addFrag(SortParicipatingTeamsFragment.newInstance(0, matchData.getLeagueActive().getLeague().getTitle(),
+        adapter.addFrag(SortParicipatingTeamsFragment.newInstance(0, 0, matchData.getLeagueActive().getLeague().getTitle(),
                 matchData.getLeagueActive().getId(), matchData.getFirstTeam().getId(),
                 matchData.getSecondTeam().getId()), getString(R.string.sort));
         adapter.addFrag(MatchScorersFragment.

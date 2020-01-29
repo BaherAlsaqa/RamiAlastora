@@ -15,9 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.OutLink;
 import com.ramialastora.ramialastora.adapters.MyMatchGoalsVideosAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.match_goals_video.MatchGoalsVideoBody;
 import com.ramialastora.ramialastora.classes.responses.match_goals_video.MatchGoalsVideoData;
 import com.ramialastora.ramialastora.interfaces.Constants;
@@ -206,10 +208,15 @@ public class MatchGoalsVideosFragment extends Fragment {
                     adapter = new MyMatchGoalsVideosAdapter(teamPlayersList, view.getContext());
                     mRecyclerView.setAdapter(adapter);
 
+                    InterstitialAd interstitialAd =
+                            MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_Match_goals_videos_inter));
+
                     adapter.setOnClickListener(new OnItemClickListener10() {
                         @Override
                         public void onItemClick(MatchGoalsVideoData item) {
                             startActivity(new Intent(getContext(), OutLink.class).putExtra(Constants.link, item.getUrl()));
+
+                            MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                         }
                     });
                     Log.d(Constants.Log + "size", "size = " + teamPlayersList.size() + "");

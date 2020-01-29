@@ -16,8 +16,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.adapters.MyTeamPlayersAdapter;
+import com.ramialastora.ramialastora.admob.MobileAdsInterface;
 import com.ramialastora.ramialastora.classes.responses.team_players.TeamPlayersBody;
 import com.ramialastora.ramialastora.classes.responses.team_players.TeamPlayersData;
 import com.ramialastora.ramialastora.interfaces.Constants;
@@ -224,6 +226,8 @@ public class TeamPlayersFragment extends Fragment {
                         Log.d(Constants.Log + "size", "teamPlayersList.size() != 0 = " + teamPlayersList.size() + "");
                         emptyData.setVisibility(View.GONE);
                     }
+                    InterstitialAd interstitialAd =
+                            MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_team_players_inter));
 
                     adapter.setOnClickListener(new OnItemClickListener9() {
                         @Override
@@ -238,6 +242,8 @@ public class TeamPlayersFragment extends Fragment {
                             fragmentTransaction.replace(R.id.nav_host_fragment, PlayerDetails.newInstance(leagueId, item.getId(), 1));
                             fragmentTransaction.addToBackStack(null);
                             fragmentTransaction.commit();
+
+                            MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                         }
                     });
 

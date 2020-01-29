@@ -26,6 +26,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyRecommendedNewsAdapter;
@@ -66,6 +67,7 @@ public class NewsDetailsFragment extends Fragment {
     private APIInterface apiInterface;
     private AVLoadingIndicatorView indicatorView;
     View noInternet, emptyData, error;
+    private InterstitialAd interstitialAd;
 
     public NewsDetailsFragment() {
         // Required empty public constructor
@@ -116,6 +118,9 @@ public class NewsDetailsFragment extends Fragment {
 
         MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_news_details_banner), view);
 
+        interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_news_details_inter));
+
         if (getArguments() != null) {
             newsData = (NewsData) getArguments().getParcelable(Constants.newsData);
             title.setText(newsData.getTitle());
@@ -140,6 +145,7 @@ public class NewsDetailsFragment extends Fragment {
                     } catch (android.content.ActivityNotFoundException ex) {
                         Toast.makeText(getContext(), getString(R.string.installmessenger), Toast.LENGTH_LONG).show();
                     }
+                    MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                 }
             });
 
@@ -147,6 +153,8 @@ public class NewsDetailsFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(getContext(), getString(R.string.news_source), Toast.LENGTH_SHORT).show();
+
+                    MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                 }
             });
 
@@ -182,6 +190,8 @@ public class NewsDetailsFragment extends Fragment {
                 @Override
                 public void onItemClick(RelatedNews item) {
                     loadOneNews(item.getId());
+
+                    MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                 }
             });
             /////////////////////////////////////////////////////////////////

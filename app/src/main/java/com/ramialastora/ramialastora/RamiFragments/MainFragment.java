@@ -98,22 +98,23 @@ public class MainFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
 //            matchDate.setText(mParam1);
         }
-
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.main_fragment_inter));
         btnReturnDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 btnReturnDate.setVisibility(View.GONE);
                 assert getFragmentManager() != null;
                 getFragmentManager().popBackStackImmediate();
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
-        InterstitialAd interstitialAd =
-                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.main_fragment_inter));
+
         clChangeDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                 ((RamiMain) Objects.requireNonNull(getActivity())).expandCloseSheet(0);
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MySearchLeagueAdapter;
@@ -124,6 +125,9 @@ public class SearchFragment extends Fragment {
         teamAdapter = new MySearchTeamAdapter(teamList, view.getContext());
         leagueAdapter = new MySearchLeagueAdapter(leagueList, view.getContext());
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_search_inter));
+
         teamAdapter.setOnClickListener(new OnItemClickListener12() {
             @Override
             public void onItemClick(Team item) {
@@ -141,6 +145,8 @@ public class SearchFragment extends Fragment {
                                 , item.getParticipatingLeagueArrayList().get(0).getId()));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
         playerAdapter.setOnClickListener(new OnItemClickListener13() {
@@ -157,6 +163,8 @@ public class SearchFragment extends Fragment {
                         , item.getId(), 0));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
         leagueAdapter.setOnClickListener(new OnItemClickListener14() {
@@ -172,6 +180,8 @@ public class SearchFragment extends Fragment {
                 fragmentTransaction.replace(R.id.nav_host_fragment, LeagueDetailsFragment.newInstance(null, 2, item.getImage(), item.getTitle(), item.getLeaguesActiveArrayList().get(0).getId()));
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

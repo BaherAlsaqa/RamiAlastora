@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
 import com.ramialastora.ramialastora.adapters.MyNotificationPaginationAdapter;
@@ -130,10 +131,13 @@ public class NotificationFragment extends Fragment {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
 
+        InterstitialAd interstitialAd =
+                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_notification_inter));
+
         adapter.setOnClickListener(new OnItemClickListener8() {
             @Override
             public void onItemClick(NotificationData item) {
-
+                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
         
