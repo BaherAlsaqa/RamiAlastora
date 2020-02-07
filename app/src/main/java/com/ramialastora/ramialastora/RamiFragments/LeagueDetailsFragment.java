@@ -228,7 +228,7 @@ public class LeagueDetailsFragment extends Fragment {
             adapter.addFrag(TodayMatches.newInstance(3, "", 0
                     , matchData.getLeagueActive().getId()), getString(R.string.matches));
             //type == 1 from leagues fragment to view banner ads;
-            adapter.addFrag(SortParicipatingTeamsFragment.newInstance(0,0
+            adapter.addFrag(SortParticipatingTeamsFragment.newInstance(0,0
                     , matchData.getLeagueActive().getLeague().getTitle(),
                     matchData.getLeagueActive().getId(), 0, 0), getString(R.string.menu_latest_news));
             adapter.addFrag(leagueScorersFragment.
@@ -239,7 +239,7 @@ public class LeagueDetailsFragment extends Fragment {
         }else if (type == 2){// from search
             adapter.addFrag(TodayMatches.newInstance(3, "", 0
                     , leagueId), getString(R.string.matches));
-            adapter.addFrag(SortParicipatingTeamsFragment.newInstance(0, 0
+            adapter.addFrag(SortParticipatingTeamsFragment.newInstance(0, 0
                     , leagueTitle,
                     leagueId, 0, 0), getString(R.string.menu_latest_news));
             adapter.addFrag(leagueScorersFragment.

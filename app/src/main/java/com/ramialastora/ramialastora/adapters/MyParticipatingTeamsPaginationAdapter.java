@@ -23,8 +23,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-import static com.ramialastora.ramialastora.RamiFragments.SortParicipatingTeamsFragment.TEAM_ID1;
-import static com.ramialastora.ramialastora.RamiFragments.SortParicipatingTeamsFragment.TEAM_ID2;
+import static com.ramialastora.ramialastora.RamiFragments.SortParticipatingTeamsFragment.TEAM_ID1;
+import static com.ramialastora.ramialastora.RamiFragments.SortParticipatingTeamsFragment.TEAM_ID2;
 
 public class MyParticipatingTeamsPaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int ITEM = 0;

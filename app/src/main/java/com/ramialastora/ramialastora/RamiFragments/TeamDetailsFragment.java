@@ -270,7 +270,7 @@ public class TeamDetailsFragment extends Fragment {
         ////////////////////////////////////////////////////////////////////////////////////////////////
         // type 1 = team details news , but type 2 = match news, but type 3 = league details news;
         adapter.addFrag(TeamLatestNewsFragment.newInstance(1, teamId, 0, 0), getString(R.string.menu_latest_news));
-        adapter.addFrag(SortParicipatingTeamsFragment.newInstance(0, 0, leagueName, leagueId, teamId, 0), getString(R.string.sort));
+        adapter.addFrag(SortParticipatingTeamsFragment.newInstance(0, 0, leagueName, leagueId, teamId, 0), getString(R.string.sort));
         adapter.addFrag(TeamPlayersFragment.newInstance(teamId, leagueId, 1), getString(R.string.players));
         viewPager1.setAdapter(adapter);
         viewPager1.invalidate();

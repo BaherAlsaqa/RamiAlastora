@@ -53,7 +53,7 @@ import retrofit2.Response;
 import static com.ramialastora.ramialastora.RamiActivities.RamiMain.FROM_BACK;
 import static com.ramialastora.ramialastora.RamiFragments.MatchDetailsFragment.BACK_FRAGMENTS;
 import static com.ramialastora.ramialastora.RamiFragments.ScorersFragment.PLAYER_ID;
-import static com.ramialastora.ramialastora.RamiFragments.SortParicipatingTeamsFragment.TEAM_ID1;
+import static com.ramialastora.ramialastora.RamiFragments.SortParticipatingTeamsFragment.TEAM_ID1;
 
 /**
  * A simple {@link Fragment} subclass.

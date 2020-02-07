@@ -49,7 +49,7 @@ import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SortParicipatingTeamsFragment extends Fragment {
+public class SortParticipatingTeamsFragment extends Fragment {
 
     private View view;
     private RecyclerView mRecyclerView;
@@ -74,8 +74,8 @@ public class SortParicipatingTeamsFragment extends Fragment {
     public static int TEAM_ID2 = 0;
     private ConstraintLayout cLayout;
 
-    public static SortParicipatingTeamsFragment newInstance(int type, int backButton, String leagueName, int leagueId, int teamId1, int teamId2) {
-        SortParicipatingTeamsFragment fragment = new SortParicipatingTeamsFragment();
+    public static SortParticipatingTeamsFragment newInstance(int type, int backButton, String leagueName, int leagueId, int teamId1, int teamId2) {
+        SortParticipatingTeamsFragment fragment = new SortParticipatingTeamsFragment();
         Bundle args = new Bundle();
         args.putString(Constants.leagueName, leagueName);
         args.putInt(Constants.backButton, backButton);
@@ -346,8 +346,12 @@ public class SortParicipatingTeamsFragment extends Fragment {
 //                    progress.setVisibility(View.INVISIBLE);
                     swiperefresh.setRefreshing(false);
                     adapter.clear();
-                    pTeamsDataList = resource.getData().getData();
-                    TOTAL_PAGES = resource.getData().getLastPage();
+                    try {
+                        pTeamsDataList = resource.getData().getData();
+                        TOTAL_PAGES = resource.getData().getLastPage();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     Log.d(Constants.Log + "size", "size = " + pTeamsDataList.size() + "");
                     adapter.addAll(pTeamsDataList);
                     if (pTeamsDataList.size() == 0) {

@@ -165,7 +165,7 @@ public class LeaguesFragment extends Fragment {
                         Log.d(Constants.Log+"league", "(scorersOrPTeams.equals(Constants.pTeams))");
                         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         //type == 1 from leagues fragment to view banner ads;
-                        fragmentTransaction.replace(R.id.nav_host_fragment, SortParicipatingTeamsFragment.
+                        fragmentTransaction.replace(R.id.nav_host_fragment, SortParticipatingTeamsFragment.
                                 newInstance(1,1, item.getTitle(), item.getLeaguesActive().get(0).getId(), 0, 0));
                         fragmentTransaction.addToBackStack(null);
                         fragmentTransaction.commit();

@@ -50,7 +50,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.ramialastora.ramialastora.RamiFragments.MatchDetailsFragment.BACK_FRAGMENTS;
-import static com.ramialastora.ramialastora.RamiFragments.SortParicipatingTeamsFragment.TEAM_ID1;
+import static com.ramialastora.ramialastora.RamiFragments.SortParticipatingTeamsFragment.TEAM_ID1;
 
 public class TodayMatches extends Fragment {
     private View view;

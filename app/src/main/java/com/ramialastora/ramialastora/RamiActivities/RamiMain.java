@@ -38,13 +38,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 import com.ramialastora.ramialastora.CustomViews.CustomTypefaceSpan;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiFragments.FavoriteFragment;
@@ -61,6 +58,8 @@ import com.ramialastora.ramialastora.utils.App;
 import com.ramialastora.ramialastora.utils.AppSharedPreferences;
 import com.ramialastora.ramialastora.utils.LocaleManager;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Objects;
@@ -76,17 +75,15 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
     private NavigationView navView;
-    private ActionBarDrawerToggle mDrawerToggle;
     private AppBarLayout appBarLayout;
     private View bottomSheetView = null;
     private BottomSheetBehavior<View> sheetBehavior;
-    private Calendar calendar = null;
-    private CalendarView calendarView;
     private APIInterface apiInterface;
     private AppSharedPreferences appSharedPreferences;
     public static int BACK_FROM_SCORERS = 0;
     public static String PLAYER_OR_TEAM_NAME;
     public static String FROM_BACK = "";
+//    private Calendar calendar = null;
 
     // for the sake of simplicity. use DI in real apps instead
     public static LocaleManager localeManager;
@@ -98,7 +95,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
+    public void onConfigurationChanged(@NotNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         LocaleManager.setLocale(RamiMain.this);
     }
@@ -126,85 +123,75 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         navView = findViewById(R.id.nav_view);
         appBarLayout = findViewById(R.id.appbarlayout);
         bottomSheetView = findViewById(R.id.bottom_sheet);
-        calendarView = findViewById(R.id.calendarView);
+        CalendarView calendarView = findViewById(R.id.calendarView);
 
         appSharedPreferences = new AppSharedPreferences(this);
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
         FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.d(Constants.Log + "token", "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        // Get new Instance ID token
-                        String token = null;
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                            token = Objects.requireNonNull(task.getResult()).getToken();
-                        } else {
-                            token = (task.getResult()).getToken();
-                        }
-                        // Log
-                        Log.d(Constants.Log, "token = " + token);
-                        boolean firstopen = appSharedPreferences.readBoolean(Constants.firstopen);
-                        if (!firstopen) {
-                            Log.d(Constants.Log, "is first open");
-                            createorUpdateUser(1, 0, token);
-                            appSharedPreferences.writeBoolean(Constants.firstopen, true);
-                            favoriteDialog(RamiMain.this);
-                        } else {
-                            Log.d(Constants.Log, "is not first open");
-                            int id = appSharedPreferences.readInteger(Constants.userid);
-                            Log.d(Constants.Log, "user id = " + id + "");
-                            createorUpdateUser(2, id, token);
-                        }
+                .addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.d(Constants.Log + "token", "getInstanceId failed", task.getException());
+                        return;
+                    }
+                    // Get new Instance ID token
+                    String token;
+                    token = Objects.requireNonNull(task.getResult()).getToken();
+                    // Log
+                    Log.d(Constants.Log, "token = " + token);
+                    boolean firstopen = appSharedPreferences.readBoolean(Constants.firstopen);
+                    if (!firstopen) {
+                        Log.d(Constants.Log, "is first open");
+                        createorUpdateUser(1, 0, token);
+                        appSharedPreferences.writeBoolean(Constants.firstopen, true);
+                        favoriteDialog(RamiMain.this);
+                    } else {
+                        Log.d(Constants.Log, "is not first open");
+                        int id = appSharedPreferences.readInteger(Constants.userid);
+                        Log.d(Constants.Log, "user id = " + id + "");
+                        createorUpdateUser(2, id, token);
                     }
                 });
 
         bottomSheet();
 
-        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(year, month, dayOfMonth);
-                int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-                String day = null;
-                switch (dayOfWeek) {
-                    case 1:
-                        day = "الاحد";
-                        break;
-                    case 2:
-                        day = "الاثنين";
-                        break;
-                    case 3:
-                        day = "الثلاثاء";
-                        break;
-                    case 4:
-                        day = "الاربعاء";
-                        break;
-                    case 5:
-                        day = "الخميس";
-                        break;
-                    case 6:
-                        day = "الجمعة";
-                        break;
-                    case 7:
-                        day = "السبت";
-                        break;
-                }
-                String dmy = dayOfMonth + "-" + (month + 1) + "-" + year + " / " + day;
-                MainFragment mainFragment = new MainFragment();
-                FragmentTransaction fragmentTransaction;
-                getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment, mainFragment.newInstance(dmy));
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-                expandCloseSheet(0);
+        calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, dayOfMonth);
+            int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+            String day = null;
+            switch (dayOfWeek) {
+                case 1:
+                    day = "الاحد";
+                    break;
+                case 2:
+                    day = "الاثنين";
+                    break;
+                case 3:
+                    day = "الثلاثاء";
+                    break;
+                case 4:
+                    day = "الاربعاء";
+                    break;
+                case 5:
+                    day = "الخميس";
+                    break;
+                case 6:
+                    day = "الجمعة";
+                    break;
+                case 7:
+                    day = "السبت";
+                    break;
             }
+            String dmy = dayOfMonth + "-" + (month + 1) + "-" + year + " / " + day;
+            MainFragment mainFragment = new MainFragment();
+            FragmentTransaction fragmentTransaction;
+            getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+            fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment, mainFragment.newInstance(dmy));
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            expandCloseSheet(0);
         });
 
         hideStatus(RamiMain.this);
@@ -289,6 +276,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
 //            System.exit(0);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void favoriteDialog(Context context) {
         final Dialog dialog1 = new Dialog(context, R.style.AppTheme);
         dialog1.show();
@@ -297,7 +285,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         hideStatus((Activity) context);
 
         // with out background
-        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        Objects.requireNonNull(dialog1.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         final ConstraintLayout constraintLayout = dialog1.findViewById(R.id.clayout);
         /*constraintLayout.setOnClickListener(new View.OnClickListener() {
@@ -314,41 +302,42 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
             }
         });*/
 
-        constraintLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                switch (event.getActionMasked()) {
-                    case MotionEvent.ACTION_UP:
-                        constraintLayout.setBackground(getResources().getDrawable(R.drawable.shape_background_favorite_start));
-                        FragmentTransaction fragmentTransaction;
-                        getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.nav_host_fragment, new FavoriteFragment());
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                        drawerLayout.closeDrawers();
-                        dialog1.dismiss();
-                        break;
-                    case MotionEvent.ACTION_DOWN:
-                        constraintLayout.setBackground(getResources().getDrawable(R.drawable.shape_background_favorite_start1));
-                        break;
-                }
-                return true;
+        constraintLayout.setOnTouchListener((v, event) -> {
+            switch (event.getActionMasked()) {
+                case MotionEvent.ACTION_UP:
+                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.shape_background_favorite_start));
+                    FragmentTransaction fragmentTransaction;
+                    getSupportFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment, new FavoriteFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                    drawerLayout.closeDrawers();
+                    dialog1.dismiss();
+                    break;
+                case MotionEvent.ACTION_DOWN:
+                    constraintLayout.setBackground(getResources().getDrawable(R.drawable.shape_background_favorite_start1));
+                    break;
             }
+            return true;
         });
     }
 
     public void bottomSheet() {
-        sheetBehavior = BottomSheetBehavior.from(bottomSheetView);
-        sheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+        try {
+            sheetBehavior = BottomSheetBehavior.from(bottomSheetView);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        sheetBehavior.addBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
             @Override
-            public void onStateChanged(@NonNull View view, int i) {
-                Log.d(Constants.Log + "sheet", "onStateChanged");
+            public void onStateChanged(@NonNull View bottomSheet, int newState) {
+
             }
 
             @Override
-            public void onSlide(@NonNull View view, float v) {
-                Log.d(Constants.Log + "sheet", "onSlide");
+            public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
             }
         });
     }
@@ -372,6 +361,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         Log.d(Constants.Log + "menu", "badgeandCheckedDrawer");
     }
 
+    @SuppressLint("InflateParams")
     public void drawerIcon(int icon) {
 
         setSupportActionBar(toolbar);
@@ -381,35 +371,32 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         getSupportActionBar().setHomeAsUpIndicator(icon);
         navView.setNavigationItemSelectedListener(this);
 
-        mDrawerToggle = new ActionBarDrawerToggle(this,
+        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this,
                 drawerLayout,
                 toolbar,
                 R.string.drawer_open,
                 R.string.drawer_close);
         mDrawerToggle.setDrawerIndicatorEnabled(false);
 
-        mDrawerToggle.setToolbarNavigationClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        mDrawerToggle.setToolbarNavigationClickListener(v -> {
 
-                ConstraintLayout constraintLayout;
-                ConstraintLayout constraintLayout1;
+            ConstraintLayout constraintLayout;
+            ConstraintLayout constraintLayout1;
 
-                constraintLayout = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.notification_badge, null);
-                constraintLayout1 = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.latest_news_badge, null);
+            constraintLayout = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.notification_badge, null);
+            constraintLayout1 = (ConstraintLayout) LayoutInflater.from(getApplicationContext()).inflate(R.layout.latest_news_badge, null);
 
-                TextView notificationBadge = constraintLayout.findViewById(R.id.notificationbadge);
-                TextView latestnewsBadge = constraintLayout1.findViewById(R.id.latestnewsbadge);
+            TextView notificationBadge = constraintLayout.findViewById(R.id.notificationbadge);
+            TextView latestnewsBadge = constraintLayout1.findViewById(R.id.latestnewsbadge);
 
-                Log.d("ff", notificationBadge.getText().toString() + " | " + latestnewsBadge.getText().toString());
-                String badge = "9";
-                String badge1 = "8";
-                notificationBadge.setText(badge);
-                latestnewsBadge.setText(badge1);
-                Log.d("df", notificationBadge.getText().toString());
+            Log.d("ff", notificationBadge.getText().toString() + " | " + latestnewsBadge.getText().toString());
+            String badge = "9";
+            String badge1 = "8";
+            notificationBadge.setText(badge);
+            latestnewsBadge.setText(badge1);
+            Log.d("df", notificationBadge.getText().toString());
 
-                drawerLayout.openDrawer(GravityCompat.START);
-            }
+            drawerLayout.openDrawer(GravityCompat.START);
         });
 
         drawerLayout.addDrawerListener(mDrawerToggle);
@@ -572,7 +559,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         expandCloseSheet(1);
-        FragmentTransaction fragmentTransaction = null;
+        FragmentTransaction fragmentTransaction;
         switch (menuItem.getItemId()) {
             case R.id.nav_main:
                 getSupportFragmentManager().popBackStack(null,
@@ -667,7 +654,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         TextView toolbarAppTitle = findViewById(R.id.apptitle);
         TextView toolbarAppTitle2 = findViewById(R.id.apptitle2);
         TextView toolbarCreatedDate = findViewById(R.id.createddatevalue);
-        TextView toolbarshare = findViewById(R.id.share);
+//        TextView toolbarshare = findViewById(R.id.share);
         Log.d("menu321", "icon : " + menu);
         try {
             toolbar.getMenu().clear();
@@ -734,14 +721,16 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                     user_id,
                     token);
         }
+        assert call != null;
         call.enqueue(new Callback<UserResp>() {
             @Override
-            public void onResponse(Call<UserResp> call, Response<UserResp> response) {
+            public void onResponse(@NotNull Call<UserResp> call, @NotNull Response<UserResp> response) {
 
                 Log.d(Constants.Log, " | Code = " + response.body());
                 UserResp resource = response.body();
                 if (response.code() == 201) {
                     String code = response.code() + "";
+                    assert resource != null;
                     int id = resource.getData().getId();
                     String token = resource.getData().getToken();
 
@@ -760,10 +749,8 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
             }
 
             @Override
-            public void onFailure(Call<UserResp> call, Throwable t) {
-                if (t != null) {
-                    Log.d(Constants.Log, "onFailure = " + t.getMessage());
-                }
+            public void onFailure(@NotNull Call<UserResp> call, @NotNull Throwable t) {
+                Log.d(Constants.Log, "onFailure = " + t.getMessage());
                 call.cancel();
             }
         });
