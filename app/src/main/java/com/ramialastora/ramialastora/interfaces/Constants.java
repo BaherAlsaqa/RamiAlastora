@@ -68,4 +68,6 @@ public interface Constants {
     String playerDetails = "PLAYER_DETAILS";
     String search = "SEARCH";
     String count_ads = "COUNT_ADS";
+    String applanguage = "APP_LANGUAGE";
+    String langState = "LANG_STATE";
 }

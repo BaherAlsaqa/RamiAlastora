@@ -104,8 +104,8 @@ public class MainFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 btnReturnDate.setVisibility(View.GONE);
-                getChildFragmentManager().popBackStackImmediate();
-                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
+                getParentFragmentManager().popBackStackImmediate();
+//                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
             }
         });
 

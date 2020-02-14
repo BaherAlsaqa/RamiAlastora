@@ -5,8 +5,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -14,7 +12,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -61,7 +58,6 @@ import com.ramialastora.ramialastora.utils.LocaleManager;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Calendar;
-import java.util.Locale;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -87,8 +83,10 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
 
     // for the sake of simplicity. use DI in real apps instead
     public static LocaleManager localeManager;
+    String language;
+    private boolean langState;
 
-    @Override
+    /*@Override
     protected void attachBaseContext(Context base) {
         localeManager = new LocaleManager(base);
         super.attachBaseContext(LocaleManager.setLocale(base));
@@ -98,18 +96,21 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
     public void onConfigurationChanged(@NotNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         LocaleManager.setLocale(RamiMain.this);
-    }
+    }*/
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Resources res = getResources();
+        /*Resources res = getResources();
         DisplayMetrics dm = res.getDisplayMetrics();
         Configuration conf = res.getConfiguration();
-        conf.setLocale(new Locale("ar"));
-        res.updateConfiguration(conf, dm);
+        language = appSharedPreferences.readString(Constants.applanguage);
+        conf.setLocale(new Locale(language));
+        res.updateConfiguration(conf, dm);*/
+
+//        setLanguage(RamiMain.this);
 
         try {
             setContentView(R.layout.activity_rami_main);
@@ -128,31 +129,41 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         appSharedPreferences = new AppSharedPreferences(this);
         apiInterface = APIClient.getClient().create(APIInterface.class);
 
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(task -> {
-                    if (!task.isSuccessful()) {
-                        Log.d(Constants.Log + "token", "getInstanceId failed", task.getException());
-                        return;
-                    }
-                    // Get new Instance ID token
-                    String token;
-                    token = Objects.requireNonNull(task.getResult()).getToken();
-                    // Log
-                    Log.d(Constants.Log, "token = " + token);
-                    boolean firstopen = appSharedPreferences.readBoolean(Constants.firstopen);
-                    if (!firstopen) {
-                        Log.d(Constants.Log, "is first open");
-                        createorUpdateUser(1, 0, token);
-                        appSharedPreferences.writeBoolean(Constants.firstopen, true);
-                        favoriteDialog(RamiMain.this);
-                    } else {
-                        Log.d(Constants.Log, "is not first open");
-                        int id = appSharedPreferences.readInteger(Constants.userid);
-                        Log.d(Constants.Log, "user id = " + id + "");
-                        createorUpdateUser(2, id, token);
-                    }
-                });
-
+        langState = appSharedPreferences.readBoolean(Constants.langState);
+//        if (!langState) {
+//            Log.d(Constants.Log + "langstate", "langState = " + langState);
+//            setLanguage(RamiMain.this);
+//            appSharedPreferences.writeBoolean(Constants.langState, true);
+//            Intent intent = new Intent(RamiMain.this, SplashScreen.class);
+//            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//            startActivity(intent);
+//        } else {
+            Log.d(Constants.Log + "langstate", "langState = " + langState);
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnCompleteListener(task -> {
+                        if (!task.isSuccessful()) {
+                            Log.d(Constants.Log + "token", "getInstanceId failed", task.getException());
+                            return;
+                        }
+                        // Get new Instance ID token
+                        String token;
+                        token = Objects.requireNonNull(task.getResult()).getToken();
+                        // Log
+                        Log.d(Constants.Log, "token = " + token);
+                        boolean firstopen = appSharedPreferences.readBoolean(Constants.firstopen);
+                        if (!firstopen) {
+                            Log.d(Constants.Log, "is first open");
+                            createorUpdateUser(1, 0, token);
+                            appSharedPreferences.writeBoolean(Constants.firstopen, true);
+                            favoriteDialog(RamiMain.this);
+                        } else {
+                            Log.d(Constants.Log, "is not first open");
+                            int id = appSharedPreferences.readInteger(Constants.userid);
+                            Log.d(Constants.Log, "user id = " + id + "");
+                            createorUpdateUser(2, id, token);
+                        }
+                    });
+//        }
         bottomSheet();
 
         calendarView.setOnDateChangeListener((view, year, month, dayOfMonth) -> {

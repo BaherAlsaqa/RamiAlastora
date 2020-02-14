@@ -4,6 +4,8 @@ package com.ramialastora.ramialastora.classes.responses.scorers;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class ScorersBody {
 
     @SerializedName("status")
@@ -17,7 +19,7 @@ public class ScorersBody {
     private String error;
     @SerializedName("data")
     @Expose
-    private Data data;
+    private ArrayList<ScorersData> data = null;
 
     public Boolean getStatus() {
         return status;
@@ -43,12 +45,11 @@ public class ScorersBody {
         this.error = error;
     }
 
-    public Data getData() {
+    public ArrayList<ScorersData> getData() {
         return data;
     }
 
-    public void setData(Data data) {
+    public void setData(ArrayList<ScorersData> data) {
         this.data = data;
     }
-
 }

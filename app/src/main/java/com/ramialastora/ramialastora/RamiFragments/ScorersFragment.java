@@ -5,7 +5,6 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -28,14 +27,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.gms.ads.InterstitialAd;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.RamiActivities.RamiMain;
-import com.ramialastora.ramialastora.adapters.MyScorersPaginationAdapter;
+import com.ramialastora.ramialastora.adapters.MyScorersAdapter;
 import com.ramialastora.ramialastora.admob.MobileAdsInterface;
-import com.ramialastora.ramialastora.classes.responses.scorers.Data;
 import com.ramialastora.ramialastora.classes.responses.scorers.ScorersBody;
 import com.ramialastora.ramialastora.classes.responses.scorers.ScorersData;
 import com.ramialastora.ramialastora.interfaces.Constants;
-import com.ramialastora.ramialastora.listeners.OnItemClickListener7;
-import com.ramialastora.ramialastora.listeners.PaginationScrollListener;
 import com.ramialastora.ramialastora.retrofit.APIClient;
 import com.ramialastora.ramialastora.retrofit.APIInterface;
 import com.ramialastora.ramialastora.utils.AppSharedPreferences;
@@ -60,20 +56,19 @@ public class ScorersFragment extends Fragment {
 
     private View view;
     private RecyclerView mRecyclerView;
-    private MyScorersPaginationAdapter adapter;
+    private MyScorersAdapter adapter;
     private LinearLayoutManager linearLayoutManager;
     private ArrayList<ScorersData> scorersList = new ArrayList<>();
     private APIInterface apiInterface;
     private SwipeRefreshLayout swiperefresh;
     private AVLoadingIndicatorView indicatorView;
     View noInternet, emptyData, error;
-    //pagination
+    /*//pagination
     private static int PAGE_START = 1;
     private boolean isLoading = false;
     private boolean isLastPage = false;
-    // limiting to 5 for this tutorial, since total pages in actual API is very large. Feel free to modify.
     private int TOTAL_PAGES = 2;
-    private int currentPage = PAGE_START;
+    private int currentPage = PAGE_START;*/
     AppSharedPreferences appSharedPreferences;
     private int userId, type;
     private int leagueId;
@@ -146,11 +141,11 @@ public class ScorersFragment extends Fragment {
 
         MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_scorers_banner), view);
 
-        //TODO //////////////////// start pagination code and settings////////////////////////////////////
+        /*//TODO //////////////////// start pagination code and settings////////////////////////////////////
         isLoading = false;
         isLastPage = false;
         currentPage = PAGE_START;
-        ///////////// end settings ///////////////
+        ///////////// end settings ///////////////*/
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
@@ -159,43 +154,24 @@ public class ScorersFragment extends Fragment {
         }
         linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
         apiInterface = APIClient.getClient().create(APIInterface.class);
-        adapter = new MyScorersPaginationAdapter(view.getContext());
-        mRecyclerView.setAdapter(adapter);
+
         swiperefresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
 
         mRecyclerView.setLayoutManager(linearLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
         mRecyclerView.setAdapter(adapter);
 
-        InterstitialAd interstitialAd =
-                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_scorers_inter));
-
-        adapter.setOnClickListener(new OnItemClickListener7() {
-            @Override
-            public void onItemClick(ScorersData item) {
-                PLAYER_ID = item.getPlayerId();
-                appSharedPreferences.writeInteger(Constants.playerId, item.getPlayerId());
-                FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.replace(R.id.nav_host_fragment, PlayerDetails.newInstance(leagueId, item.getPlayerId(), 0));
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-
-                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
-            }
-        });
-
         userId = appSharedPreferences.readInteger(Constants.userid);
 
-        loadFirstPage();
+        try {
+            loadFirstPage();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadFirstPage();
-            }
-        });
+        swiperefresh.setOnRefreshListener(() -> loadFirstPage());
 
-        mRecyclerView.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
+        /*mRecyclerView.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
             @Override
             protected void loadMoreItems() {
                 Log.d(Constants.Log + "addOnScroll", "addOnScrollListener");
@@ -232,7 +208,7 @@ public class ScorersFragment extends Fragment {
             public boolean isLoading() {
                 return isLoading;
             }
-        });
+        });*/
 
         //TODO //////////// end pagination code /////////////////////////////////////////////
 
@@ -251,8 +227,7 @@ public class ScorersFragment extends Fragment {
                     ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
                     ((RamiMain) getActivity()).checkMainFragmentOnDrawer();
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
-                    assert getFragmentManager() != null;
-                    getFragmentManager().popBackStack();//back one fragment
+                    getParentFragmentManager().popBackStack();//back one fragment
                     return true;
                 }
                 return false;
@@ -346,8 +321,7 @@ public class ScorersFragment extends Fragment {
                 scorersBodyCall = apiInterface.getScorers(getString(R.string.api_key),
                         getString(R.string.api_username),
                         getString(R.string.api_password),
-                        leagueId,
-                        currentPage);
+                        leagueId);
             }
         }
         return scorersBodyCall;
@@ -355,17 +329,18 @@ public class ScorersFragment extends Fragment {
 
     private ArrayList<ScorersData> fetchResults(Response<ScorersBody> response) {
         ScorersBody ScorersBody = response.body();
-        Data data = ScorersBody.getData();
-        return data.getData();
+//        Data data = ScorersBody.getData();
+        assert ScorersBody != null;
+        return ScorersBody.getData();
     }
 
     private void loadFirstPage() {
         Log.d(Constants.Log, "loadFirstPage");
-        ///////////////TODO pagination settings//////////////
+        /*///////////////TODO pagination settings//////////////
         isLoading = false;
         isLastPage = false;
         currentPage = PAGE_START;
-        ////////////////////////////
+        ////////////////////////////*/
         indicatorView.show();
         noInternet.setVisibility(View.GONE);
         emptyData.setVisibility(View.GONE);
@@ -391,11 +366,25 @@ public class ScorersFragment extends Fragment {
 
 //                    progress.setVisibility(View.INVISIBLE);
                     swiperefresh.setRefreshing(false);
-                    adapter.clear();
-                    scorersList = resource.getData().getData();
-                    TOTAL_PAGES = resource.getData().getLastPage();
+                    scorersList.clear();
+                    scorersList = resource.getData();
+//                    TOTAL_PAGES = resource.getData().getLastPage();
                     Log.d(Constants.Log + "size", "size = " + scorersList.size() + "");
-                    adapter.addAll(scorersList);
+                    adapter = new MyScorersAdapter(scorersList, view.getContext());
+                    mRecyclerView.setAdapter(adapter);
+                    InterstitialAd interstitialAd =
+                            MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_scorers_inter));
+                    adapter.setOnClickListener(item -> {
+                        PLAYER_ID = item.getPlayerId();
+                        appSharedPreferences.writeInteger(Constants.playerId, item.getPlayerId());
+                        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity())
+                                .getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.nav_host_fragment, PlayerDetails.newInstance(leagueId, item.getPlayerId(), 0));
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+
+                        MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
+                    });
                     if (scorersList.size() == 0) {
                         Log.d(Constants.Log + "size", "scorersList.size() == 0 = " + scorersList.size() + "");
                         emptyData.setVisibility(View.VISIBLE);
@@ -403,8 +392,8 @@ public class ScorersFragment extends Fragment {
                         Log.d(Constants.Log + "size", "scorersList.size() != 0 = " + scorersList.size() + "");
                         emptyData.setVisibility(View.GONE);
                     }
-                    if (currentPage < TOTAL_PAGES) adapter.addLoadingFooter();
-                    else isLastPage = true;
+                    /*if (currentPage < TOTAL_PAGES) adapter.addLoadingFooter();
+                    else isLastPage = true;*/
 
                 }else if (response.code() == 404){
                     Log.d(Constants.Log + "res", "if (response.code() == 404)");
@@ -437,51 +426,51 @@ public class ScorersFragment extends Fragment {
         });
     }
 
-    public void loadNextPage() {
-
-        Log.d(Constants.Log, "loadNextPage: " + currentPage);
-
-        callTopRatedMoviesApi().enqueue(new Callback<ScorersBody>() {
-            @Override
-            public void onResponse(Call<ScorersBody> call, Response<ScorersBody> response) {
-
-                ScorersBody resource = response.body();
-
-                int code = response.code();
-
-                Log.d(Constants.Log + "ScorersBody", " | Code = " + code);
-
-                if (response.code() == 200) {
-
-                    scorersList = fetchResults(response);
-                    Log.d(Constants.Log + "sdata", adapter.getItemCount() + " fetch");
-
-                    if (isLoading) {
-                        adapter.removeLoadingFooter();
-                        isLoading = false;
-                        adapter.addAll(scorersList);
-                    }
-
-                    if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
-                    else isLastPage = true;
-                } else {
-
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ScorersBody> call, Throwable t) {
-                t.printStackTrace();
-                try {
-                    if (getContext() != null) {
-                        Log.d(Constants.Log, t.getMessage());
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    public void loadNextPage() {
+//
+//        Log.d(Constants.Log, "loadNextPage: " + currentPage);
+//
+//        callTopRatedMoviesApi().enqueue(new Callback<ScorersBody>() {
+//            @Override
+//            public void onResponse(Call<ScorersBody> call, Response<ScorersBody> response) {
+//
+//                ScorersBody resource = response.body();
+//
+//                int code = response.code();
+//
+//                Log.d(Constants.Log + "ScorersBody", " | Code = " + code);
+//
+//                if (response.code() == 200) {
+//
+//                    scorersList = fetchResults(response);
+//                    Log.d(Constants.Log + "sdata", adapter.getItemCount() + " fetch");
+//
+//                    if (isLoading) {
+//                        adapter.removeLoadingFooter();
+//                        isLoading = false;
+//                        adapter.addAll(scorersList);
+//                    }
+//
+//                    if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
+//                    else isLastPage = true;
+//                } else {
+//
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<ScorersBody> call, Throwable t) {
+//                t.printStackTrace();
+//                try {
+//                    if (getContext() != null) {
+//                        Log.d(Constants.Log, t.getMessage());
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     private boolean isNetworkConnected() {
         ConnectivityManager cm = null;

@@ -10,8 +10,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.initialization.InitializationStatus;
-import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.ramialastora.ramialastora.R;
 import com.ramialastora.ramialastora.interfaces.Constants;
 import com.ramialastora.ramialastora.utils.AppSharedPreferences;
@@ -24,11 +22,7 @@ public interface MobileAdsInterface {
         AdView adView = new AdView(context);
         adView.setAdSize(AdSize.BANNER);
         adView.setAdUnitId(adsKey);
-        MobileAds.initialize(context, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+        MobileAds.initialize(context, initializationStatus -> { });
         adView = view.findViewById(R.id.adView);
         adView.setVisibility(View.VISIBLE);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -38,11 +32,7 @@ public interface MobileAdsInterface {
 
     static InterstitialAd interstitialAds(Context context, int onClick, String adsKey) {
 
-        MobileAds.initialize(context, new OnInitializationCompleteListener() {
-            @Override
-            public void onInitializationComplete(InitializationStatus initializationStatus) {
-            }
-        });
+        MobileAds.initialize(context, initializationStatus -> { });
         InterstitialAd mInterstitialAd = new InterstitialAd(context);
         mInterstitialAd.setAdUnitId(adsKey);
 

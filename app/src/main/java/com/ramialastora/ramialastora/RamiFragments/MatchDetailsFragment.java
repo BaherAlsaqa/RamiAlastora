@@ -148,8 +148,10 @@ public class MatchDetailsFragment extends Fragment {
                 // comming
                 underwayFramLayout.setVisibility(View.GONE);
                 time.setText(matchData.getStartTime());
-                String[] time = matchData.getRemainingTime().split(" ", 2);
-                remainingTime.setText(getString(R.string.remaining) + " " + time[0].trim() + " " + time[1].trim());
+                if(matchData.getRemainingTime() != null) {
+                    String[] time = matchData.getRemainingTime().split(" ", 2);
+                    remainingTime.setText(getString(R.string.remaining) + " " + time[0].trim() + " " + time[1].trim());
+                }
             } else if (matchData.getStatus() == 0) {
                 // underway
                 underwayFramLayout.setVisibility(View.VISIBLE);

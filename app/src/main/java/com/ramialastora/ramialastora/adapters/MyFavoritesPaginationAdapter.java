@@ -128,10 +128,14 @@ public class MyFavoritesPaginationAdapter extends RecyclerView.Adapter<RecyclerV
                                     .resize(100, 100)
                                     .into(holder1.leagueImage);
                         } else if (TYPE == 2) {// get teams with search
-                            Picasso.get().load(Constants.imageBaseURL +
-                                    favorite.getParticipatingLeagues().get(0).getLeague().getImage())
-                                    .resize(100, 100)
-                                    .into(holder1.leagueImage);
+                            if (favorite.getParticipatingLeagues() != null)
+                            if (favorite.getParticipatingLeagues().get(0).getLeague() != null)
+                            if (favorite.getParticipatingLeagues().get(0).getLeague().getImage() != null) {
+                                Picasso.get().load(Constants.imageBaseURL +
+                                        favorite.getParticipatingLeagues().get(0).getLeague().getImage())
+                                        .resize(100, 100)
+                                        .into(holder1.leagueImage);
+                            }
                         }
                         if (favorite.getParticipatingLeagues().get(0).getSorting() != null) {
                             holder1.sort.setText(favorite.getParticipatingLeagues().get(0).getSorting() + "");

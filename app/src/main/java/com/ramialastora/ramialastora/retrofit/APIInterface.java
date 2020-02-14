@@ -117,16 +117,14 @@ public interface APIInterface {
     Call<ScorersBody> getScorers(@Header("API-KEY") String apiKey,
                                  @Header("API-USERNAME") String apiUsername,
                                  @Header("API-PASSWORD") String apiPassword,
-                                 @Path("league_id") int leagueId,
-                                 @Query("page") int nextPage);
+                                 @Path("league_id") int leagueId);
 
     @GET("leagues/{league_id}/teams-participating/{user_id}")
     Call<ParticipatingTeamsBody> getPaticipatingTeams(@Header("API-KEY") String apiKey,
                                                       @Header("API-USERNAME") String apiUsername,
                                                       @Header("API-PASSWORD") String apiPassword,
                                                       @Path("league_id") int leagueId,
-                                                      @Path("user_id") int userId,
-                                                      @Query("page") int nextPage);
+                                                      @Path("user_id") int userId);
 
     @GET("teams/{team_id}/players")
     Call<TeamPlayersBody> getTeamPlayers(@Header("API-KEY") String apiKey,

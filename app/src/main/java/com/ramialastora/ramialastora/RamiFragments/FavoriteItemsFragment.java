@@ -59,9 +59,9 @@ public class FavoriteItemsFragment extends Fragment {
     private static int PAGE_START = 1;
     private boolean isLoading = false;
     private boolean isLastPage = false;
-    // limiting to 5 for this tutorial, since total pages in actual API is very large. Feel free to modify.
     private int TOTAL_PAGES = 2;
     private int currentPage = PAGE_START;
+    //
     private View v;
     private AppSharedPreferences appSharedPreferences;
     private EditText etSearch;
