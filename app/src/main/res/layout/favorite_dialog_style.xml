@@ -50,7 +50,7 @@
                 app:srcCompat="@drawable/ic_favorite1"
                 tools:ignore="VectorDrawableCompat" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/favdetails"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

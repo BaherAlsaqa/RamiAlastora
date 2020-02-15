@@ -37,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/leagues_teams_holder" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/teamname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 app:layout_constraintStart_toEndOf="@+id/teamimage"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/customBoldTextView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomTextView
                 android:id="@+id/sort"
                 android:layout_width="@dimen/imagewidthheight30dp"
                 android:layout_height="@dimen/imagewidthheight30dp"

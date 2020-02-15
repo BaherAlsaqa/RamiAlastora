@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:background="@drawable/custom_ripple">
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/teamsort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/teamname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             app:layout_constraintStart_toEndOf="@+id/teamsortimage"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/played"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/stand1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -72,7 +72,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/won"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
             app:layout_constraintStart_toEndOf="@+id/stand1"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/drew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
             app:layout_constraintStart_toEndOf="@+id/stand1"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/loser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
             app:layout_constraintStart_toEndOf="@+id/stand1"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/scored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/ownnet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -142,7 +142,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/rest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -156,7 +156,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/points"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

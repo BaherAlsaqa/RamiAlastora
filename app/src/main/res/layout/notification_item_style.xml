@@ -37,7 +37,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_player_notification" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/notificationtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/notificationtitle"
                 app:srcCompat="@drawable/ic_notification_time" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomTextView
                 android:id="@+id/notificationtime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

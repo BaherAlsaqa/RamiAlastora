@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/league_1" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/leaguename"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
             app:srcCompat="@drawable/ic_chevron_left"
             tools:ignore="VectorDrawableCompat" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomTextView
             android:id="@+id/sort"
             android:layout_width="@dimen/imagewidthheight30dp"
             android:layout_height="@dimen/imagewidthheight30dp"

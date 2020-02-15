@@ -32,7 +32,7 @@
                 android:paddingEnd="@dimen/marginend5dp"
                 app:layout_collapseMode="pin" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomTextView
                 android:id="@+id/apptitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
-                <com.ramialastora.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramialastora.CustomViews.CustomTextView
                     android:id="@+id/share"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
                     app:layout_constraintVertical_bias="0.0"
                     app:srcCompat="@drawable/logotoolbar" />
 
-                <com.ramialastora.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramialastora.CustomViews.CustomTextView
                     android:id="@+id/apptitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,7 +111,7 @@
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
-                <com.ramialastora.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramialastora.CustomViews.CustomTextView
                     android:id="@+id/createddate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -140,7 +140,7 @@
                     app:srcCompat="@drawable/ic_notification_time"
                     tools:ignore="VectorDrawableCompat" />
 
-                <com.ramialastora.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramialastora.CustomViews.CustomTextView
                     android:id="@+id/createddatevalue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

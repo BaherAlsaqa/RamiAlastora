@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/flleagueslist">
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
             app:layout_constraintStart_toEndOf="@+id/sort"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/pelanties"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/golas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

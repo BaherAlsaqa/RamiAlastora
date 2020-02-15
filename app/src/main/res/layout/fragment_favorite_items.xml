@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/customBoldTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,7 +31,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/viewtype"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
         </RadioGroup>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.ramialastora.ramialastora.CustomViews.CustomEditText
+    <com.ramyhd.ramialastora.CustomViews.CustomEditText
         android:id="@+id/search"
         android:layout_width="0dp"
         android:layout_height="@dimen/height50dp"

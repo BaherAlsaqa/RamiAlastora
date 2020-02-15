@@ -17,7 +17,7 @@
             android:background="@color/white">
 
 
-            <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/title" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomTextView
                 android:id="@+id/viewsvalue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/viewsvalue"
                 app:srcCompat="@drawable/news_image" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/newsdetails"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newsimage2" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomButton
+            <com.ramyhd.ramialastora.CustomViews.CustomButton
                 android:id="@+id/newssource"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/newsdetails" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomButton
+            <com.ramyhd.ramialastora.CustomViews.CustomButton
                 android:id="@+id/share"
                 style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
@@ -141,7 +141,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/share" />
 
-            <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/customBoldTextView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

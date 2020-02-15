@@ -82,7 +82,7 @@
                         app:srcCompat="@drawable/ic_goals"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/customBoldTextView15"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/goalsvalue"
                         android:layout_width="@dimen/imagewidthheight30dp"
                         android:layout_height="@dimen/imagewidthheight30dp"
@@ -132,7 +132,7 @@
                         app:srcCompat="@drawable/ic_goals_his_team"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/customBoldTextView18"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView13" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/goalshisteamvalue"
                         android:layout_width="@dimen/imagewidthheight30dp"
                         android:layout_height="@dimen/imagewidthheight30dp"
@@ -182,7 +182,7 @@
                         app:srcCompat="@drawable/ic_true_goals"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/customBoldTextView19"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -195,7 +195,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/truepenaltiesvalue"
                         android:layout_width="@dimen/imagewidthheight30dp"
                         android:layout_height="@dimen/imagewidthheight30dp"
@@ -232,7 +232,7 @@
                         app:srcCompat="@drawable/ic_false_goals"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/customBoldTextView21"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -245,7 +245,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/falsepenaltiesvalue"
                         android:layout_width="@dimen/imagewidthheight30dp"
                         android:layout_height="@dimen/imagewidthheight30dp"
@@ -282,7 +282,7 @@
                         app:srcCompat="@drawable/ic_yellow_cards"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/customBoldTextView31"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -295,7 +295,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView30" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/yellowcardvalue"
                         android:layout_width="@dimen/imagewidthheight30dp"
                         android:layout_height="@dimen/imagewidthheight30dp"
@@ -332,7 +332,7 @@
                         app:srcCompat="@drawable/ic_red_cards"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/customBoldTextView51"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -345,7 +345,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/imageView50" />
 
-                    <com.ramialastora.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                         android:id="@+id/redcardvalue"
                         android:layout_width="@dimen/imagewidthheight30dp"
                         android:layout_height="@dimen/imagewidthheight30dp"
