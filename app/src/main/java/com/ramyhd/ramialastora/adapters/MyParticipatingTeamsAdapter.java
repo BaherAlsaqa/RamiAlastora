@@ -53,11 +53,7 @@ public class MyParticipatingTeamsAdapter extends RecyclerView.Adapter<MyParticip
     public void onBindViewHolder(final MyParticipatingTeamsAdapter.ViewHolder holder1, int position) {
         final ParticipatingTeamsData pTeamsData = participatingTeamsData.get(position);
 
-        if (pTeamsData.getRanking() != null) {
-            holder1.teamssort.setText(pTeamsData.getRanking() + "");
-        }else{
-            holder1.teamssort.setText("0");
-        }
+        holder1.teamssort.setText(position+1+"");
         Picasso.get().load(Constants.imageBaseURL+pTeamsData.getLogo()).into(holder1.teamsSortImage);
         if (pTeamsData.getName().length() > 14)
             holder1.teameName.setText(pTeamsData.getName().substring(0, 14));

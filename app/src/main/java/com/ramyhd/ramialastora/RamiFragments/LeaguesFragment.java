@@ -46,6 +46,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -385,6 +386,7 @@ public class LeaguesFragment extends Fragment {
                     notificationList = resource.getData().getData();
                     TOTAL_PAGES = resource.getData().getLastPage();
                     Log.d(Constants.Log + "size", "size = " + notificationList.size() + "");
+                    Collections.sort(notificationList, LeagueData.BY_SORTING_ALPHABETICAL);
                     adapter.addAll(notificationList);
                     if (notificationList.size() == 0) {
                         Log.d(Constants.Log + "size", "notificationList.size() == 0 = " + notificationList.size() + "");

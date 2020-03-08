@@ -37,6 +37,8 @@ import com.ramyhd.ramialastora.interfaces.Constants;
 import com.ramyhd.ramialastora.utils.AppSharedPreferences;
 import com.squareup.picasso.Picasso;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -52,7 +54,7 @@ public class MatchDetailsFragment extends Fragment {
     private MatchData matchData;
     private ConstraintLayout constraintLayout5;
     private ImageView leagueImage, team1Image, team2Image;
-    private TextView leagueName, playground, teamName1, teamName2, time, remainingTime;
+    private TextView leagueName, playground, teamName1, teamName2, time, firstTeam, secondTeam, dash, remainingTime, statusDetails;
     private AppSharedPreferences appSharedPreferences;
     private FrameLayout underwayFramLayout;
     public static int BACK_FRAGMENTS;
@@ -81,8 +83,8 @@ public class MatchDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_match_details, container, false);
 
-        ((RamiMain) getActivity()).changeToolbarBackground(R.color.white);
-        ((RamiMain) getActivity()).setLightStatusBar(view, getActivity());
+        ((RamiMain) Objects.requireNonNull(getActivity())).changeToolbarBackground(R.color.white);
+        RamiMain.setLightStatusBar(view, getActivity());
         ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
 
         tabLayout = view.findViewById(R.id.tabs);
@@ -96,8 +98,12 @@ public class MatchDetailsFragment extends Fragment {
         teamName1 = view.findViewById(R.id.teamname1);
         teamName2 = view.findViewById(R.id.teamname2);
         time = view.findViewById(R.id.time);
+        firstTeam = view.findViewById(R.id.firstteam);
+        secondTeam = view.findViewById(R.id.secondteam);
+        dash = view.findViewById(R.id.dash);
         remainingTime = view.findViewById(R.id.remainingtime);
         underwayFramLayout = view.findViewById(R.id.underwayframlayout);
+        statusDetails = view.findViewById(R.id.statusdetails);
 
         //Initializing
         appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
@@ -144,8 +150,13 @@ public class MatchDetailsFragment extends Fragment {
 
         String timeResult = hours + ":" + mins; // updated value every1 second*/
 
+            firstTeam.setVisibility(View.GONE);
+            secondTeam.setVisibility(View.GONE);
+            dash.setVisibility(View.GONE);
+
             if (matchData.getStatus() == 1) {
                 // comming
+                statusDetails.setVisibility(View.GONE);
                 underwayFramLayout.setVisibility(View.GONE);
                 time.setText(matchData.getStartTime());
                 if(matchData.getRemainingTime() != null) {
@@ -154,27 +165,35 @@ public class MatchDetailsFragment extends Fragment {
                 }
             } else if (matchData.getStatus() == 0) {
                 // underway
+                statusDetails.setVisibility(View.VISIBLE);
+                statusDetails.setText(matchData.getStatusDetails());
                 underwayFramLayout.setVisibility(View.VISIBLE);
                 time.setText(getString(R.string.underway));
                 time.setTextColor(Color.parseColor("#00B8A9"));
 
                 String[] time = matchData.getElapsedTime().split(" ", 2);
-                remainingTime.setText(getString(R.string.remaining) + " " + time[0].trim() + " " + time[1].trim());
+                remainingTime.setText(getString(R.string.elapsed) + " " + time[0].trim() + " " + time[1].trim());
                 remainingTime.setTextColor(Color.parseColor("#557AE0"));
             } else if (matchData.getStatus() == 2) {
                 // ended
+                statusDetails.setVisibility(View.GONE);
                 underwayFramLayout.setVisibility(View.GONE);
+                firstTeam.setVisibility(View.VISIBLE);
+                secondTeam.setVisibility(View.VISIBLE);
+                dash.setVisibility(View.VISIBLE);
+                time.setVisibility(View.GONE);
                 if (matchData.getResult() != null) {
                     String[] result = matchData.getResult().split("-", 2);
-                    String r1 = result[0];
-                    String r2 = result[1];
-                    String finalResult = r1+" - "+r2;
-                    time.setText(finalResult);
+                    String r2 = result[0];
+                    String r1 = result[1];
+//                    String finalResult = r1+" - "+r2;
+                    firstTeam.setText(r1);
+                    secondTeam.setText(r2);
                 } else {
-                    String finalResult = "0"+" - "+"0";
-                    time.setText(finalResult);
+//                    String finalResult = "0"+" - "+"0";
+                    firstTeam.setText("0");
+                    secondTeam.setText("0");
                 }
-                time.setTextSize(25);
                 remainingTime.setText(matchData.getStartDate());
             }
             //TODO ///////////////////pass data to details match////////////////
@@ -199,15 +218,11 @@ public class MatchDetailsFragment extends Fragment {
                 appSharedPreferences.writeString(Constants.liveURL, matchData.getLiveVideoUrl());
             if (matchData.getMatchVideoUrl() != null)
                 appSharedPreferences.writeString(Constants.urlVideo, matchData.getMatchVideoUrl());
+            appSharedPreferences.writeInteger(Constants.isShowLiveVideo, matchData.getIsShowLiveVideo());
             appSharedPreferences.writeString(Constants.teamName1, matchData.getFirstTeam().getName());
             appSharedPreferences.writeString(Constants.teamName2, matchData.getSecondTeam().getName());
         }
-        constraintLayout5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+        constraintLayout5.setOnClickListener(v -> { });
 
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
@@ -218,6 +233,7 @@ public class MatchDetailsFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 LinearLayout view2 = (LinearLayout) tab.getCustomView();
+                assert view2 != null;
                 TextView tabTitle = view2.findViewById(R.id.title);
                 tabTitle.setTextColor(getResources().getColor(R.color.colorAccent));
             }
@@ -225,6 +241,7 @@ public class MatchDetailsFragment extends Fragment {
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
                 LinearLayout view2 = (LinearLayout) tab.getCustomView();
+                assert view2 != null;
                 TextView tabTitle = view2.findViewById(R.id.title);
                 tabTitle.setTextColor(getResources().getColor(R.color.text_gray1));
             }
@@ -239,34 +256,30 @@ public class MatchDetailsFragment extends Fragment {
         view.setFocusableInTouchMode(true);
         view.requestFocus();
 
-        view.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.d(Constants.Log+"back", "if( keyCode == KeyEvent.KEYCODE_BACK ) || details match details");
-                    String back = appSharedPreferences.readString(Constants.backFragmentCurrent);
-                    if (back.equalsIgnoreCase(Constants.leagueF)){
-                        FragmentTransaction fragmentTransaction = null;
-                        Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack(null,
-                                FragmentManager.POP_BACK_STACK_INCLUSIVE);//Clear from back stack
-                        fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.nav_host_fragment, new MainFragment());
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();
-                    }else {
-                        ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(
-                                R.menu.toolbar_search, R.string.app_name, "", 1);
-                        ((RamiMain) getActivity()).badgeandCheckedDrawer();
-                        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-                        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+        view.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                Log.d(Constants.Log+"back", "if( keyCode == KeyEvent.KEYCODE_BACK ) || details match details");
+                String back = appSharedPreferences.readString(Constants.backFragmentCurrent);
+                if (back.equalsIgnoreCase(Constants.leagueF)){
+                    FragmentTransaction fragmentTransaction = null;
+                    Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack(null,
+                            FragmentManager.POP_BACK_STACK_INCLUSIVE);//Clear from back stack
+                    fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment, new MainFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }else {
+                    ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(
+                            R.menu.toolbar_search, R.string.app_name, "", 1);
+                    ((RamiMain) getActivity()).badgeandCheckedDrawer();
+                    ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                    ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
-                        assert getFragmentManager() != null;
-                        getFragmentManager().popBackStack();//back one fragment
-                    }
-                    return true;
+                    getParentFragmentManager().popBackStack();//back one fragment
                 }
-                return false;
+                return true;
             }
+            return false;
         });
         //TODO ///////////End back/////////////
 
@@ -290,12 +303,12 @@ public class MatchDetailsFragment extends Fragment {
         String[] exams = {getString(R.string.details), getString(R.string.matchgoals), getString(R.string.news),
                 getString(R.string.sort), getString(R.string.menu_scorer)};
         for (int i = 0; i <= 4; i++) {
-            LinearLayout tabOne = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.tab_header, null);
+            @SuppressLint("InflateParams") LinearLayout tabOne = (LinearLayout) LayoutInflater.from(getActivity()).inflate(R.layout.tab_header, null);
             TextView tabTitle = tabOne.findViewById(R.id.title);
             tabTitle.setText(exams[i]);
             if (i == 0)
                 tabTitle.setTextColor(getResources().getColor(R.color.colorAccent));
-            tabLayout.getTabAt(i).setCustomView(tabOne);
+            Objects.requireNonNull(tabLayout.getTabAt(i)).setCustomView(tabOne);
         }
     }
 
@@ -324,6 +337,7 @@ public class MatchDetailsFragment extends Fragment {
             super(manager);
         }
 
+        @NotNull
         @Override
         public Fragment getItem(int position) {
             return mFragmentList.get(position);
@@ -349,7 +363,7 @@ public class MatchDetailsFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 //        menu.clear();
         if (BACK_FRAGMENTS > 0) {
-            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
             Log.d(Constants.Log + "menu11", "onCreateOptionsMenu");
             BACK_FRAGMENTS = 0;
         }

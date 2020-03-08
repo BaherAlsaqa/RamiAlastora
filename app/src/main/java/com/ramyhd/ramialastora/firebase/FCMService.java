@@ -36,18 +36,22 @@ public class FCMService extends FirebaseMessagingService {
         // Check if message Constants a data payload.
 
             Log.d(Constants.LOG+"fcm", "Message data payload: " + remoteMessage.getData());
+            Log.d(Constants.LOG+"fcm", "remoteMessage.getNotification()).getBody() = "
+                    + Objects.requireNonNull(remoteMessage.getNotification()).getBody());
 
                 Log.d(Constants.LOG+"fcm", "remoteMessage.getData().get(notificationId != null");
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
 //                scheduleJob();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
                     Log.d(Constants.LOG+"fcm", "Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT");
-                    showNotification(Objects.requireNonNull(remoteMessage.getNotification()).getBody(),
+                    showNotification(Objects.requireNonNull(remoteMessage.getNotification()).getTitle(),
+                            remoteMessage.getNotification().getBody(),
                             0);
                 }else{
                     Log.d(Constants.LOG+"fcm", "else  Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT");
-                    showNotification(remoteMessage.getNotification().getBody(),
-                            Integer.parseInt(remoteMessage.getData().get("notificationId")));
+                    showNotification(Objects.requireNonNull(remoteMessage.getNotification()).getTitle(),
+                            remoteMessage.getNotification().getBody(),
+                            0);
                 }
 
 
@@ -62,7 +66,7 @@ public class FCMService extends FirebaseMessagingService {
     }
 
 
-    private void showNotification(String message, int notifi_id) {
+    private void showNotification(String title, String message, int notifi_id) {
         Log.d(Constants.LOG+"fcm", "showNotification");
         Intent intent = new Intent(this, RamiMain.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -77,7 +81,7 @@ public class FCMService extends FirebaseMessagingService {
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "FileDownload")
                 .setAutoCancel(true)
-                .setContentTitle(getString(R.string.app_name))
+                .setContentTitle(title)
                 .setContentText(message)
                 .setSmallIcon(R.drawable.logotoolbar)
                 .setContentIntent(pendingIntent)

@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class LeagueData {
 
@@ -38,6 +39,9 @@ public class LeagueData {
     @SerializedName("leagues_active")
     @Expose
     private ArrayList<LeaguesActive> leaguesActive = null;
+
+    public static final Comparator<LeagueData> BY_SORTING_ALPHABETICAL =
+            (leagueData1, leagueData2) -> leagueData1.leaguesActive.get(0).getSorting().compareTo(leagueData2.leaguesActive.get(0).getSorting());
 
     public Integer getId() {
         return id;

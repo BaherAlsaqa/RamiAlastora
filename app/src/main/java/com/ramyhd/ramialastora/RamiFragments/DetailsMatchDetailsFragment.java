@@ -99,6 +99,7 @@ public class DetailsMatchDetailsFragment extends Fragment {
         String matchDateValue = appSharedPreferences.readString(Constants.matchDate);
         String urlLiveVideo = appSharedPreferences.readString(Constants.liveURL);
         String urlVideoValue = appSharedPreferences.readString(Constants.urlVideo);
+        int isShowLiveVideo = appSharedPreferences.readInteger(Constants.isShowLiveVideo);
         String teamName1 = appSharedPreferences.readString(Constants.teamName1);
         String teamName2 = appSharedPreferences.readString(Constants.teamName2);
 
@@ -152,22 +153,23 @@ public class DetailsMatchDetailsFragment extends Fragment {
 
         if (urlLiveVideo != null) {
             if (!urlLiveVideo.equalsIgnoreCase("")) {
-                live.setVisibility(View.VISIBLE);
+                if (isShowLiveVideo == 1) {
+                    live.setVisibility(View.VISIBLE);
 
-                live.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                    live.setOnClickListener(v -> {
                         startActivity(new Intent(getContext(), OutLink.class).putExtra(Constants.link, urlLiveVideo));
                         MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
-                        /*FragmentTransaction fragmentTransaction = null;
-                        fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.nav_host_fragment, WebViewVideo.newInstance(urlLiveVideo));
-                        fragmentTransaction.addToBackStack(null);
-                        fragmentTransaction.commit();*/
-                        /*Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlLiveVideo));
-                        startActivity(browserIntent);*/
-                    }
-                });
+                    /*FragmentTransaction fragmentTransaction = null;
+                    fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment, WebViewVideo.newInstance(urlLiveVideo));
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();*/
+                    /*Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlLiveVideo));
+                    startActivity(browserIntent);*/
+                    });
+                }else{
+                    live.setVisibility(View.GONE);
+                }
             } else {
                 live.setVisibility(View.GONE);
             }
@@ -176,14 +178,14 @@ public class DetailsMatchDetailsFragment extends Fragment {
         }
         if (urlVideoValue != null) {
             if (!urlVideoValue.equalsIgnoreCase("")) {
-                clURLVideo.setVisibility(View.VISIBLE);
+                    clURLVideo.setVisibility(View.VISIBLE);
 
-                clURLVideo.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(getContext(), OutLink.class).putExtra(Constants.link, urlVideoValue));
+                    clURLVideo.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(getContext(), OutLink.class).putExtra(Constants.link, urlVideoValue));
 
-                        MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
+                            MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
                         /*FragmentTransaction fragmentTransaction = null;
                         fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.nav_host_fragment, WebViewVideo.newInstance(urlVideoValue));
@@ -191,8 +193,8 @@ public class DetailsMatchDetailsFragment extends Fragment {
                         fragmentTransaction.commit();*/
                         /*Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlVideoValue));
                         startActivity(browserIntent);*/
-                    }
-                });
+                        }
+                    });
             } else {
                 clURLVideo.setVisibility(View.GONE);
             }

@@ -1,5 +1,6 @@
 package com.ramyhd.ramialastora.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -46,6 +47,7 @@ public class MyScorersAdapter extends RecyclerView.Adapter<MyScorersAdapter.View
         return holderR;
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(final MyScorersAdapter.ViewHolder holder1, int position) {
         final ScorersData scorers = scorersData.get(position);
@@ -64,6 +66,9 @@ public class MyScorersAdapter extends RecyclerView.Adapter<MyScorersAdapter.View
         holder1.goals.setText(scorers.getTotalGoal() + "");
         holder1.truePelanties.setText(scorers.getPenaltiesTrue() + "");
         holder1.falsePelanties.setText(scorers.getPenaltiesFalse() + "");
+
+        holder1.yellowCard.setVisibility(View.INVISIBLE);
+        holder1.redCard.setVisibility(View.INVISIBLE);
 
         if (scorers.getCards().size() > 0) {
             if (scorers.getCards().get(0).equalsIgnoreCase(context.getString(R.string.yellow))) {

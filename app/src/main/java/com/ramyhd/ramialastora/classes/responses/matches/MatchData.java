@@ -36,6 +36,9 @@ public class MatchData implements Parcelable {
     @SerializedName("match_video_url")
     @Expose
     private String matchVideoUrl;
+    @SerializedName("is_show_live_video")
+    @Expose
+    private int isShowLiveVideo;
     @SerializedName("league_active_id")
     @Expose
     private Integer leagueActiveId;
@@ -60,6 +63,9 @@ public class MatchData implements Parcelable {
     @SerializedName("status")
     @Expose
     private int status;
+    @SerializedName("status_details")
+    @Expose
+    private String statusDetails;
     @SerializedName("elapsed_time")
     @Expose
     private String elapsedTime;
@@ -122,8 +128,10 @@ public class MatchData implements Parcelable {
         updatedAt = in.readString();
         timeNow = in.readString();
         dateNow = in.readString();
+        isShowLiveVideo = in.readInt();
         status = in.readInt();
         elapsedTime = in.readString();
+        statusDetails = in.readString();
         remainingTime = in.readString();
         matchliveVideoUrl = in.readString();
     }
@@ -212,6 +220,14 @@ public class MatchData implements Parcelable {
         this.matchVideoUrl = matchVideoUrl;
     }
 
+    public int getIsShowLiveVideo() {
+        return isShowLiveVideo;
+    }
+
+    public void setIsShowLiveVideo(int isShowLiveVideo) {
+        this.isShowLiveVideo = isShowLiveVideo;
+    }
+
     public Integer getLeagueActiveId() {
         return leagueActiveId;
     }
@@ -274,6 +290,14 @@ public class MatchData implements Parcelable {
 
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    public String getStatusDetails() {
+        return statusDetails;
+    }
+
+    public void setStatusDetails(String statusDetails) {
+        this.statusDetails = statusDetails;
     }
 
     public String getElapsedTime() {
@@ -390,7 +414,9 @@ public class MatchData implements Parcelable {
         dest.writeString(timeNow);
         dest.writeString(dateNow);
         dest.writeInt(status);
+        dest.writeInt(isShowLiveVideo);
         dest.writeString(elapsedTime);
+        dest.writeString(statusDetails);
         dest.writeString(remainingTime);
         dest.writeString(matchliveVideoUrl);
     }

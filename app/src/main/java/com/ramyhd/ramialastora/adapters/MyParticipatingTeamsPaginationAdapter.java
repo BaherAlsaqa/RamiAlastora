@@ -89,11 +89,7 @@ public class MyParticipatingTeamsPaginationAdapter extends RecyclerView.Adapter<
             case ITEM:
                 final Holder holder1 = (Holder) holder;
 
-                if (pTeamsData.getRanking() != null) {
-                    holder1.teamssort.setText(pTeamsData.getRanking() + "");
-                }else{
-                    holder1.teamssort.setText("0");
-                }
+                holder1.teamssort.setText(position+1+"");
                 Picasso.get().load(Constants.imageBaseURL+pTeamsData.getLogo()).into(holder1.teamsSortImage);
                 if (pTeamsData.getName().length() > 14)
                     holder1.teameName.setText(pTeamsData.getName().substring(0, 14));

@@ -158,6 +158,47 @@
             app:layout_constraintStart_toStartOf="@+id/remainingtime" />
 
         <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/secondteam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:lines="1"
+            android:text="5"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/remainingtime"
+            app:layout_constraintStart_toStartOf="@+id/remainingtime" />
+
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/dash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:lines="1"
+            android:text="-"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/remainingtime"
+            app:layout_constraintEnd_toEndOf="@+id/remainingtime"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintStart_toStartOf="@+id/remainingtime" />
+
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/firstteam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:lines="1"
+            android:text="2"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text25sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/remainingtime"
+            app:layout_constraintEnd_toEndOf="@+id/remainingtime" />
+
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/remainingtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -170,6 +211,21 @@
             app:layout_constraintBottom_toTopOf="@+id/teamname1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            android:id="@+id/statusdetails"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:lines="1"
+            android:text="متبقي 4 أيام"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/text12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/teamname1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/remainingtime" />
 
         <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
             android:id="@+id/playground"

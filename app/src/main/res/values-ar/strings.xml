@@ -92,6 +92,7 @@
     <string name="teams">الفِرَق</string>
     <string name="search_for_t_p_l">البحث عن الفرق, اللاعبون, البطولات</string>
     <string name="sort_title">ت</string>
+    <string name="elapsed">منقضي</string>
     <!--يجب ربط التطبيق بالفيربيز قبل نشرة<string name="rami_main_banner">ca-app-pub-1064539523810191/7767011825</string>يجب ربط التطبيق بالفيربيز قبل نشرة
     <string name="fragment_notification_banner">ca-app-pub-1064539523810191/1183192101</string>
     <string name="fragment_favorite_banner">ca-app-pub-1064539523810191/6103705662</string>
