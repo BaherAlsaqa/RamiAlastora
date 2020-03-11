@@ -491,10 +491,10 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
 
-                    menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+                    /*menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
                     badgeandCheckedDrawer();
                     changeToolbarBackground(R.color.white);
-                    drawerIcon(R.drawable.ic_menu_dark);
+                    drawerIcon(R.drawable.ic_menu_dark);*/
                 } else if (back.equalsIgnoreCase(Constants.teamF)) {
                     Log.d(Constants.Log + "menuteam", "(Constants.teamF)");
                     onBackPressed();
@@ -506,15 +506,21 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                     Log.d(Constants.Log + "menuteam", "(Constants.playerF)");
                     onBackPressed();
                     if (FROM_BACK.equals(Constants.search)) {
-                        menuBackIcon(R.menu.toolbar_back, R.string.search, "", 0);
-                        FROM_BACK = "";
-                    } else {
+//                        menuBackIcon(R.menu.toolbar_back, R.string.search, "", 0);
                         menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+                        FROM_BACK = "";
                     }
                     badgeandCheckedDrawer();
                     changeToolbarBackground(R.drawable.back_toolbar);
                     drawerIcon(R.drawable.ic_menu);
-                } else {
+                } else if (back.equalsIgnoreCase(Constants.scorersF)){
+                    getSupportFragmentManager().popBackStack(null,
+                            FragmentManager.POP_BACK_STACK_INCLUSIVE);//Clear from back stack
+                    fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                    fragmentTransaction.replace(R.id.nav_host_fragment, new MainFragment());
+                    fragmentTransaction.addToBackStack(null);
+                    fragmentTransaction.commit();
+                }else {
                     Log.d(Constants.Log + "menuteam", "(else)");
                     onBackPressed();
                     toolbar.getMenu().clear();

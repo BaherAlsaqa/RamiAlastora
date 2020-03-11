@@ -5,8 +5,8 @@ public interface Constants {
     String language = "language";
     String Log = "baher";
     String URL = "http://dev.alastora.foryou.ps";
-    String baseURL = "https://dev.ramyhd.com/api/v1/";//http://dev.alastora.foryou.ps/alastora/public/api/v1/
-    String imageBaseURL = "https://dev.ramyhd.com/public/";//http://dev.alastora.foryou.ps/alastora/public/
+    String baseURL = "https://ramyhd.com/api/v1/";//http://dev.alastora.foryou.ps/alastora/public/api/v1/
+    String imageBaseURL = "https://ramyhd.com/public/";//http://dev.alastora.foryou.ps/alastora/public/
     String LOG = "baher";
     String firstopen = "FIRST_OPEN";
     String userid = "USER_ID";
@@ -71,4 +71,5 @@ public interface Constants {
     String applanguage = "APP_LANGUAGE";
     String langState = "LANG_STATE";
     String isShowLiveVideo = "IS_SHOW_LIVE_VIDEO";
+    String scorersF = "SCORERS_FRAGMENT";
 }

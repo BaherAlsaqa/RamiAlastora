@@ -323,6 +323,7 @@ public class MatchDetailsFragment extends Fragment {
         adapter.addFrag(SortParticipatingTeamsFragment.newInstance(0, 0, matchData.getLeagueActive().getLeague().getTitle(),
                 matchData.getLeagueActive().getId(), matchData.getFirstTeam().getId(),
                 matchData.getSecondTeam().getId()), getString(R.string.sort));
+        appSharedPreferences.writeString(Constants.backFragmentCurrent, Constants.scorersF);
         adapter.addFrag(MatchScorersFragment.
                 newInstance(matchData.getId(), matchData.getLeagueActive().getId()), getString(R.string.menu_scorer));
         viewPager1.setAdapter(adapter);

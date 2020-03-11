@@ -40,6 +40,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.ramyhd.ramialastora.RamiActivities.RamiMain.FROM_BACK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -109,6 +111,9 @@ public class MatchScorersFragment extends Fragment {
                 loadMatchGoalsVideos();
             }
         });
+
+        //to back white header match details
+        FROM_BACK = Constants.playerF;
 
         /*int sorts[] = {
                 1,2,3,4,5,6,7,8,9,10,11,12
@@ -227,7 +232,7 @@ public class MatchScorersFragment extends Fragment {
                                 appSharedPreferences.writeInteger(Constants.playerId, item.getPlayerId());
 
                                 FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                                fragmentTransaction.replace(R.id.nav_host_fragment, PlayerDetails.newInstance(leagueId, item.getPlayerId(), 0));
+                                fragmentTransaction.replace(R.id.nav_host_fragment, PlayerDetails.newInstance(leagueId, item.getPlayerId(), 2));
                                 fragmentTransaction.addToBackStack(null);
                                 fragmentTransaction.commit();
 

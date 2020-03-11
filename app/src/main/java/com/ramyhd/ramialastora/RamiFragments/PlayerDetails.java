@@ -25,6 +25,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
@@ -145,14 +146,25 @@ public class PlayerDetails extends Fragment {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
                     if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                        Log.d(Constants.Log, "if( keyCode == KeyEvent.KEYCODE_BACK )");
-                        ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
-                        ((RamiMain) getActivity()).badgeandCheckedDrawer();
-                        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-                        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                        String back = appSharedPreferences.readString(Constants.backFragmentCurrent);
+                        if (back.equalsIgnoreCase(Constants.scorersF)){
+                            FragmentTransaction fragmentTransaction = null;
+                            Objects.requireNonNull(getActivity()).getSupportFragmentManager().popBackStack(null,
+                                    FragmentManager.POP_BACK_STACK_INCLUSIVE);//Clear from back stack
+                            fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                            fragmentTransaction.replace(R.id.nav_host_fragment, new MainFragment());
+                            fragmentTransaction.addToBackStack(null);
+                            fragmentTransaction.commit();
+                        }else {
+                            Log.d(Constants.Log, "if( keyCode == KeyEvent.KEYCODE_BACK )");
+                            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
+                            ((RamiMain) getActivity()).badgeandCheckedDrawer();
+                            ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
-                        assert getFragmentManager() != null;
-                        getFragmentManager().popBackStack();//back one fragment
+                            assert getParentFragmentManager() != null;
+                            getParentFragmentManager().popBackStack();//back one fragment
+                        }
                         return true;
                     }
                     return false;
@@ -237,8 +249,7 @@ public class PlayerDetails extends Fragment {
                 ((RamiMain) getActivity()).badgeandCheckedDrawer();
                 ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
                 ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);*/
-                assert getFragmentManager() != null;
-                getFragmentManager().popBackStack();
+                getParentFragmentManager().popBackStack();
                 break;
             case R.id.action_share:
                 Log.d(Constants.Log, "case R.id.action_share:");

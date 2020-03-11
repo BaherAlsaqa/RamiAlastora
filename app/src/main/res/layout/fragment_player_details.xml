@@ -191,7 +191,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/viewpager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/nointernet" />
 
     <include
         android:id="@+id/error"
@@ -201,7 +201,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/viewpager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/nointernet" />
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"

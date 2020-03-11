@@ -181,8 +181,7 @@ public class LeagueDetailsFragment extends Fragment {
                     ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
                     ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
-                    assert getFragmentManager() != null;
-                    getFragmentManager().popBackStack();//back one fragment
+                    getParentFragmentManager().popBackStack();//back one fragment
                     return true;
                 }
                 return false;
