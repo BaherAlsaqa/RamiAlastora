@@ -111,7 +111,7 @@ public class MatchDetailsFragment extends Fragment {
         MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_match_details_banner), view);
 
         if (getArguments() != null) {
-            matchData = (MatchData) getArguments().getParcelable(Constants.matchdata);
+            matchData = getArguments().getParcelable(Constants.matchdata);
             assert matchData != null;
             if (matchData.getLeagueActive() != null) {
                 if (matchData.getLeagueActive().getLeague() != null) {

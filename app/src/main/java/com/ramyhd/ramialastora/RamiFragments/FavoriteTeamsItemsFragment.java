@@ -244,39 +244,43 @@ public class FavoriteTeamsItemsFragment extends Fragment {
             @Override
             public void onResponse(@NotNull Call<BodyData> call, @NotNull Response<BodyData> response) {
 
-                BodyData resource = response.body();
+                try {
+                    BodyData resource = response.body();
 
-                assert resource != null;
-                if (resource.isStatus() != null) {
-                    String status = resource.isStatus();
+                    assert resource != null;
+                    if (resource.isStatus() != null) {
+                        String status = resource.isStatus();
 
-                    int code = response.code();
+                        int code = response.code();
 
-                    Log.d(Constants.Log + "BodyData", "Status = " + status + " | Code = " + code);
+                        Log.d(Constants.Log + "BodyData", "Status = " + status + " | Code = " + code);
 
-                    if (status.equals("true")) {
+                        if (status.equals("true")) {
 
-                        favoriteList = fetchResults(response);
+                            favoriteList = fetchResults(response);
 
-                        if (!isLoading) {
+                            if (!isLoading) {
 
-                        } else {
-                            adapter.removeLoadingFooter();
-                            isLoading = false;
-                            adapter.addAll(favoriteList);
-                        }
-
-                        if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
-                        else isLastPage = true;
-                    } else {
-                        try {
-                            if (getContext() != null) {
-                                Log.d(Constants.Log, "error");
+                            } else {
+                                adapter.removeLoadingFooter();
+                                isLoading = false;
+                                adapter.addAll(favoriteList);
                             }
-                        } catch (Exception e) {
-                            e.printStackTrace();
+
+                            if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
+                            else isLastPage = true;
+                        } else {
+                            try {
+                                if (getContext() != null) {
+                                    Log.d(Constants.Log, "error");
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
 
             }

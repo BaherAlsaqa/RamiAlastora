@@ -127,13 +127,22 @@
 
     <include
         android:id="@+id/nointernet"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margintop100dp"
         layout="@layout/no_internet_layout" />
 
     <include
         android:id="@+id/emptydata"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margintop100dp"
         layout="@layout/empty_layout" />
 
     <include
         android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/margintop100dp"
         layout="@layout/error_layout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

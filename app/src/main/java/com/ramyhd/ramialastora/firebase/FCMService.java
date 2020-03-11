@@ -35,7 +35,11 @@ public class FCMService extends FirebaseMessagingService {
 
         // Check if message Constants a data payload.
 
-            Log.d(Constants.LOG+"fcm", "Message data payload: " + remoteMessage.getData());
+            Log.d(Constants.LOG+"fcm", "Message data payload: " + remoteMessage.toString());
+            Log.d(Constants.LOG+"fcm", "details : " + remoteMessage.getData());
+            Object o = remoteMessage.getData().get("message");
+        Log.d(Constants.LOG+"fcm", "data details : " + remoteMessage.getData().get("details"));
+        Log.d(Constants.LOG+"fcm", "notification details : " + remoteMessage.getNotification().getBody());
             Log.d(Constants.LOG+"fcm", "remoteMessage.getNotification()).getBody() = "
                     + Objects.requireNonNull(remoteMessage.getNotification()).getBody());
 
