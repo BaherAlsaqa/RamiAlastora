@@ -68,7 +68,7 @@ import retrofit2.Response;
 import static com.ramyhd.ramialastora.RamiActivities.SplashScreen.setLanguage;
 import static com.ramyhd.ramialastora.RamiFragments.MatchDetailsFragment.BACK_FRAGMENTS;
 
-public class RamiMain extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class FromNotification extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawerLayout;
     private Toolbar toolbar;
@@ -107,7 +107,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         super.onCreate(savedInstanceState);
         intent = getIntent();
         try {
-            if (intent != null){
+            if (intent != null&& ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) == 0)){
                 String data = intent.getStringExtra("data");
                 String id = intent.getStringExtra("newsId");
                 assert data != null;
@@ -140,7 +140,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         String currentLanguage = Resources.getSystem().getConfiguration().locale.getLanguage();
         Log.d(Constants.Log, "current language = " + currentLanguage);
         if (!currentLanguage.equalsIgnoreCase("ar"))
-            setLanguage(RamiMain.this);
+            setLanguage(FromNotification.this);
 
         try {
             setContentView(R.layout.activity_rami_main);
@@ -163,9 +163,9 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
         if (!langState) {
             if (!currentLanguage.equalsIgnoreCase("ar")) {
                 Log.d(Constants.Log + "langstate", "langState = " + langState);
-                setLanguage(RamiMain.this);
+                setLanguage(FromNotification.this);
                 appSharedPreferences.writeBoolean(Constants.langState, true);
-                Intent intent = new Intent(RamiMain.this, SplashScreen.class);
+                Intent intent = new Intent(FromNotification.this, SplashScreen.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             } else {
@@ -215,7 +215,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
             expandCloseSheet(0);
         });
 
-        hideStatus(RamiMain.this);
+        hideStatus(FromNotification.this);
 //        setLightStatusBar(drawerLayout, RamiMain.this);
 
         drawerIcon(R.drawable.ic_menu);
@@ -306,7 +306,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                         Log.d(Constants.Log, "is first open");
                         createorUpdateUser(1, 0, token);
                         appSharedPreferences.writeBoolean(Constants.firstopen, true);
-                        favoriteDialog(RamiMain.this);
+                        favoriteDialog(FromNotification.this);
                     } else {
                         Log.d(Constants.Log, "is not first open");
                         int id = appSharedPreferences.readInteger(Constants.userid);
@@ -319,7 +319,7 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
     private void setNewLocale() {
         App.localeManager.setNewLocale(this, "ar");
 
-        Intent i = new Intent(this, RamiMain.class);
+        Intent i = new Intent(this, FromNotification.class);
         startActivity(i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
 
 //            System.exit(0);
@@ -687,11 +687,11 @@ public class RamiMain extends AppCompatActivity implements NavigationView.OnNavi
                 break;*/
             case R.id.nav_facebook:
 //                newFacebookIntent(this.getPackageManager(), "https://www.facebook.com/ramyhdsport/");
-                startActivity(getOpenFacebookIntent(RamiMain.this, 1));
+                startActivity(getOpenFacebookIntent(FromNotification.this, 1));
                 drawerLayout.closeDrawers();
                 break;
             case R.id.nav_twitter:
-                startActivity(getOpenFacebookIntent(RamiMain.this, 2));
+                startActivity(getOpenFacebookIntent(FromNotification.this, 2));
                 drawerLayout.closeDrawers();
                 break;
             case R.id.nav_logout:

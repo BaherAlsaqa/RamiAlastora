@@ -21,6 +21,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.adapters.MyParticipatingTeamsAdapter;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
@@ -107,33 +108,33 @@ public class SortParticipatingTeamsFragment extends Fragment {
         Log.e("teamsSortFragment", "teamsSortFragment :" + backButton);
 
         if (backButton > 0) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
                 ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_back, 0, leagueName, 3);
-            } else {
-                ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, leagueName, 3);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ((FromNotification) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_back, 0, leagueName, 3);
             }
         }
+            mRecyclerView = view.findViewById(R.id.recyclerview);
+            swiperefresh = view.findViewById(R.id.swiperefresh);
+            indicatorView = view.findViewById(R.id.avi);
+            noInternet = view.findViewById(R.id.nointernet);
+            emptyData = view.findViewById(R.id.emptydata);
+            error = view.findViewById(R.id.error);
+            cLayout = view.findViewById(R.id.clayout);
 
-        mRecyclerView = view.findViewById(R.id.recyclerview);
-        swiperefresh = view.findViewById(R.id.swiperefresh);
-        indicatorView = view.findViewById(R.id.avi);
-        noInternet = view.findViewById(R.id.nointernet);
-        emptyData = view.findViewById(R.id.emptydata);
-        error = view.findViewById(R.id.error);
-        cLayout = view.findViewById(R.id.clayout);
+            cLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        cLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                }
+            });
 
-            }
-        });
+            //Initializing
+            appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
 
-        //Initializing
-        appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
-
-        if (type == 1)
-            MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_participating_team_banner), view);
+            if (type == 1)
+                MobileAdsInterface.bannerAds(getContext(), getString(R.string.fragment_participating_team_banner), view);
 
         /*//TODO //////////////////// start pagination code and settings////////////////////////////////////
         isLoading = false;
@@ -141,30 +142,30 @@ public class SortParticipatingTeamsFragment extends Fragment {
         currentPage = PAGE_START;
         ///////////// end settings ///////////////*/
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
-        } else {
-            appSharedPreferences = new AppSharedPreferences(getContext());
-        }
-        linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
-        apiInterface = APIClient.getClient().create(APIInterface.class);
-
-        swiperefresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
-
-        mRecyclerView.setLayoutManager(linearLayoutManager);
-        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        mRecyclerView.setAdapter(adapter);
-
-        userId = appSharedPreferences.readInteger(Constants.userid);
-
-        loadPTeamsData();
-
-        swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadPTeamsData();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                appSharedPreferences = new AppSharedPreferences(Objects.requireNonNull(getContext()));
+            } else {
+                appSharedPreferences = new AppSharedPreferences(getContext());
             }
-        });
+            linearLayoutManager = new LinearLayoutManager(view.getContext(), LinearLayoutManager.VERTICAL, false);
+            apiInterface = APIClient.getClient().create(APIInterface.class);
+
+            swiperefresh.setColorSchemeColors(getResources().getColor(R.color.colorAccent));
+
+            mRecyclerView.setLayoutManager(linearLayoutManager);
+            mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+            mRecyclerView.setAdapter(adapter);
+
+            userId = appSharedPreferences.readInteger(Constants.userid);
+
+            loadPTeamsData();
+
+            swiperefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+                @Override
+                public void onRefresh() {
+                    loadPTeamsData();
+                }
+            });
 
         /*mRecyclerView.addOnScrollListener(new PaginationScrollListener(linearLayoutManager) {
             @Override
@@ -205,7 +206,7 @@ public class SortParticipatingTeamsFragment extends Fragment {
             }
         });*/
 
-        //TODO //////////// end pagination code /////////////////////////////////////////////
+            //TODO //////////// end pagination code /////////////////////////////////////////////
         
         /*/////////////////////////////add data to recyclerview/////////////////////////////
         mRecyclerView = view.findViewById(R.id.recyclerview);
@@ -263,134 +264,135 @@ public class SortParticipatingTeamsFragment extends Fragment {
         });
         /////////////////////////////////////////////////////////////////*/
 
-        return view;
-    }
-
-    private Call<ParticipatingTeamsBody> callTopRatedMoviesApi() {
-        Call<ParticipatingTeamsBody> participatingTeamsBodyCall = null;
-        Log.d(Constants.Log + "user_id", "user id = " + userId);
-        if (getContext() != null) {
-            participatingTeamsBodyCall = apiInterface.getPaticipatingTeams(getString(R.string.api_key),
-                    getString(R.string.api_username),
-                    getString(R.string.api_password),
-                    leagueId,
-                    userId);
+            return view;
         }
-        return participatingTeamsBodyCall;
-    }
 
-    private ArrayList<ParticipatingTeamsData> fetchResults(Response<ParticipatingTeamsBody> response) {
-        ParticipatingTeamsBody ParticipatingTeamsBody = response.body();
+        private Call<ParticipatingTeamsBody> callTopRatedMoviesApi () {
+            Call<ParticipatingTeamsBody> participatingTeamsBodyCall = null;
+            Log.d(Constants.Log + "user_id", "user id = " + userId);
+            if (getContext() != null) {
+                participatingTeamsBodyCall = apiInterface.getPaticipatingTeams(getString(R.string.api_key),
+                        getString(R.string.api_username),
+                        getString(R.string.api_password),
+                        leagueId,
+                        userId);
+            }
+            return participatingTeamsBodyCall;
+        }
+
+        private ArrayList<ParticipatingTeamsData> fetchResults
+        (Response < ParticipatingTeamsBody > response) {
+            ParticipatingTeamsBody ParticipatingTeamsBody = response.body();
 //        Data data = ParticipatingTeamsBody.getData();
-        assert ParticipatingTeamsBody != null;
-        return ParticipatingTeamsBody.getData();
-    }
+            assert ParticipatingTeamsBody != null;
+            return ParticipatingTeamsBody.getData();
+        }
 
-    private void loadPTeamsData() {
-        Log.d(Constants.Log, "loadFirstPage");
+        private void loadPTeamsData () {
+            Log.d(Constants.Log, "loadFirstPage");
         /*///////////////TODO pagination settings//////////////
         isLoading = false;
         isLastPage = false;
         currentPage = PAGE_START;
         ////////////////////////////*/
-        indicatorView.show();
-        noInternet.setVisibility(View.GONE);
-        emptyData.setVisibility(View.GONE);
-        error.setVisibility(View.GONE);
-        mRecyclerView.setVisibility(View.VISIBLE);
-        if (!isNetworkConnected()) {
-            swiperefresh.setRefreshing(false);
-            noInternet.setVisibility(View.VISIBLE);
-            indicatorView.hide();
-        }
-        callTopRatedMoviesApi().enqueue(new Callback<ParticipatingTeamsBody>() {
-            @Override
-            public void onResponse(@NotNull Call<ParticipatingTeamsBody> call, @NotNull Response<ParticipatingTeamsBody> response) {
-
-                ParticipatingTeamsBody resource = response.body();
-                Log.d(Constants.Log + "res", "onResponse");
-                if (response.code() == 200) {
-                    try {
-                        indicatorView.hide();
-                        boolean status = resource.getStatus();
-                        int code = response.code();
-                        Log.d(Constants.Log, "Status = " + status + " | Code = " + code);
-                        Log.d(Constants.Log + "res", "if (response.code() == 200)");
-
-//                    progress.setVisibility(View.INVISIBLE);
-                        swiperefresh.setRefreshing(false);
-                        pTeamsDataList.clear();
-                        pTeamsDataList = resource.getData();
-//                        TOTAL_PAGES = resource.getData().getLastPage();
-
-                        Log.d(Constants.Log + "size", "size = " + pTeamsDataList.size() + "");
-                        adapter = new MyParticipatingTeamsAdapter(pTeamsDataList, view.getContext());
-                        mRecyclerView.setAdapter(adapter);
-                        InterstitialAd interstitialAd =
-                                MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_sort_participating_teams_inter));
-
-                        adapter.setOnClickListener(new OnItemClickListener3() {
-                            @Override
-                            public void onItemClick(ParticipatingTeamsData item) {
-                                appSharedPreferences.writeString(Constants.backFragmentCurrent, Constants.teamF);
-                                FragmentTransaction fragmentTransaction = null;
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-                                    fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
-                                } else {
-                                    fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-                                }
-                                fragmentTransaction.replace(R.id.nav_host_fragment, TeamDetailsFragment
-                                        .newInstance(item.getFavorite(), item.getTemaId(), item.getName(), item.getLogo(), item.getCountry(), leagueName, leagueId));
-                                fragmentTransaction.addToBackStack(null);
-                                fragmentTransaction.commit();
-
-                                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
-                            }
-                        });
-                        if (pTeamsDataList != null)
-                        if (pTeamsDataList.size() == 0) {
-                            Log.d(Constants.Log + "size", "pTeamsDataList.size() == 0 = " + pTeamsDataList.size() + "");
-                            emptyData.setVisibility(View.VISIBLE);
-                        } else {
-                            Log.d(Constants.Log + "size", "pTeamsDataList.size() != 0 = " + pTeamsDataList.size() + "");
-                            emptyData.setVisibility(View.GONE);
-                        }
-                        /*if (currentPage < TOTAL_PAGES) adapter.addLoadingFooter();
-                        else isLastPage = true;*/
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } else if (response.code() == 404) {
-                    Log.d(Constants.Log + "res", "if (response.code() == 404)");
-                    emptyData.setVisibility(View.VISIBLE);
-                    indicatorView.hide();
-                    swiperefresh.setRefreshing(false);
-                } else {
-                    Log.d(Constants.Log + "res", "if (!!!response.code() == 200)");
-                    indicatorView.hide();
-                    error.setVisibility(View.VISIBLE);
-                    swiperefresh.setRefreshing(false);
-                }
-
-
-            }
-
-            @Override
-            public void onFailure(Call<ParticipatingTeamsBody> call, Throwable t) {
-                Log.d(Constants.Log + "55", "onFailure = " + t.getLocalizedMessage());
-                Log.d(Constants.Log + "res", "onFailure = " + t.getMessage() + "");
-                if (t instanceof IOException) {
-                    swiperefresh.setRefreshing(false);
-                    noInternet.setVisibility(View.VISIBLE);
-                } else {
-                    error.setVisibility(View.VISIBLE);
-                }
-                call.cancel();
+            indicatorView.show();
+            noInternet.setVisibility(View.GONE);
+            emptyData.setVisibility(View.GONE);
+            error.setVisibility(View.GONE);
+            mRecyclerView.setVisibility(View.VISIBLE);
+            if (!isNetworkConnected()) {
+                swiperefresh.setRefreshing(false);
+                noInternet.setVisibility(View.VISIBLE);
                 indicatorView.hide();
             }
-        });
-    }
+            callTopRatedMoviesApi().enqueue(new Callback<ParticipatingTeamsBody>() {
+                @Override
+                public void onResponse(@NotNull Call<ParticipatingTeamsBody> call, @NotNull Response<ParticipatingTeamsBody> response) {
+
+                    ParticipatingTeamsBody resource = response.body();
+                    Log.d(Constants.Log + "res", "onResponse");
+                    if (response.code() == 200) {
+                        try {
+                            indicatorView.hide();
+                            boolean status = resource.getStatus();
+                            int code = response.code();
+                            Log.d(Constants.Log, "Status = " + status + " | Code = " + code);
+                            Log.d(Constants.Log + "res", "if (response.code() == 200)");
+
+//                    progress.setVisibility(View.INVISIBLE);
+                            swiperefresh.setRefreshing(false);
+                            pTeamsDataList.clear();
+                            pTeamsDataList = resource.getData();
+//                        TOTAL_PAGES = resource.getData().getLastPage();
+
+                            Log.d(Constants.Log + "size", "size = " + pTeamsDataList.size() + "");
+                            adapter = new MyParticipatingTeamsAdapter(pTeamsDataList, view.getContext());
+                            mRecyclerView.setAdapter(adapter);
+                            InterstitialAd interstitialAd =
+                                    MobileAdsInterface.interstitialAds(getContext(), 1, getString(R.string.fragment_sort_participating_teams_inter));
+
+                            adapter.setOnClickListener(new OnItemClickListener3() {
+                                @Override
+                                public void onItemClick(ParticipatingTeamsData item) {
+                                    appSharedPreferences.writeString(Constants.backFragmentCurrent, Constants.teamF);
+                                    FragmentTransaction fragmentTransaction = null;
+                                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                                        fragmentTransaction = Objects.requireNonNull(getActivity()).getSupportFragmentManager().beginTransaction();
+                                    } else {
+                                        fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
+                                    }
+                                    fragmentTransaction.replace(R.id.nav_host_fragment, TeamDetailsFragment
+                                            .newInstance(item.getFavorite(), item.getTemaId(), item.getName(), item.getLogo(), item.getCountry(), leagueName, leagueId));
+                                    fragmentTransaction.addToBackStack(null);
+                                    fragmentTransaction.commit();
+
+                                    MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
+                                }
+                            });
+                            if (pTeamsDataList != null)
+                                if (pTeamsDataList.size() == 0) {
+                                    Log.d(Constants.Log + "size", "pTeamsDataList.size() == 0 = " + pTeamsDataList.size() + "");
+                                    emptyData.setVisibility(View.VISIBLE);
+                                } else {
+                                    Log.d(Constants.Log + "size", "pTeamsDataList.size() != 0 = " + pTeamsDataList.size() + "");
+                                    emptyData.setVisibility(View.GONE);
+                                }
+                        /*if (currentPage < TOTAL_PAGES) adapter.addLoadingFooter();
+                        else isLastPage = true;*/
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else if (response.code() == 404) {
+                        Log.d(Constants.Log + "res", "if (response.code() == 404)");
+                        emptyData.setVisibility(View.VISIBLE);
+                        indicatorView.hide();
+                        swiperefresh.setRefreshing(false);
+                    } else {
+                        Log.d(Constants.Log + "res", "if (!!!response.code() == 200)");
+                        indicatorView.hide();
+                        error.setVisibility(View.VISIBLE);
+                        swiperefresh.setRefreshing(false);
+                    }
+
+
+                }
+
+                @Override
+                public void onFailure(Call<ParticipatingTeamsBody> call, Throwable t) {
+                    Log.d(Constants.Log + "55", "onFailure = " + t.getLocalizedMessage());
+                    Log.d(Constants.Log + "res", "onFailure = " + t.getMessage() + "");
+                    if (t instanceof IOException) {
+                        swiperefresh.setRefreshing(false);
+                        noInternet.setVisibility(View.VISIBLE);
+                    } else {
+                        error.setVisibility(View.VISIBLE);
+                    }
+                    call.cancel();
+                    indicatorView.hide();
+                }
+            });
+        }
 
 //    public void loadNextPage() {
 //
@@ -438,15 +440,15 @@ public class SortParticipatingTeamsFragment extends Fragment {
 //        });
 //    }
 
-    private boolean isNetworkConnected() {
-        ConnectivityManager cm = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            cm = (ConnectivityManager) Objects.requireNonNull(getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
-        } else {
-            cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        private boolean isNetworkConnected () {
+            ConnectivityManager cm = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+                cm = (ConnectivityManager) Objects.requireNonNull(getActivity()).getSystemService(Context.CONNECTIVITY_SERVICE);
+            } else {
+                cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+            }
+
+            return cm.getActiveNetworkInfo() != null;
         }
 
-        return cm.getActiveNetworkInfo() != null;
     }
-
-}

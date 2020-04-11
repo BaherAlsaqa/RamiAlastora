@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/height88dp"
+    android:layout_height="@dimen/height98dp"
     android:background="@color/text_gray2"
     android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height80dp"
+        android:layout_height="@dimen/height90dp"
         android:id="@+id/clitem"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -36,16 +36,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_player_notification"
-                tools:ignore="VectorDrawableCompat" />
+                tools:ignore="ContentDescription,VectorDrawableCompat" />
 
             <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/notificationtitle"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="18dp"
                 android:layout_marginEnd="16dp"
-                android:text=""
+                android:maxLines="2"
+                android:text="asdasdasd asda asd asd asda sd asd asda sda asd asd asd asda sdas das dasda sd "
                 android:textColor="@color/dark_green"
                 android:textSize="@dimen/text14sp"
                 android:textStyle="bold"
@@ -59,9 +60,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintBottom_toBottomOf="@+id/notificationtime"
                 app:layout_constraintStart_toEndOf="@+id/notificationtype"
-                app:layout_constraintTop_toBottomOf="@+id/notificationtitle"
                 app:srcCompat="@drawable/ic_notification_time"
                 tools:ignore="VectorDrawableCompat" />
 
@@ -70,13 +71,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="6dp"
+                android:layout_marginBottom="8dp"
                 android:text=""
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/text12sp"
                 android:textStyle="normal"
-                app:layout_constraintStart_toEndOf="@+id/imageView5"
-                app:layout_constraintTop_toBottomOf="@+id/notificationtitle" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView5" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

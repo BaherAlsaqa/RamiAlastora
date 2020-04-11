@@ -25,6 +25,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.adapters.MyNewsPaginationAdapter;
 import com.ramyhd.ramialastora.adapters.MyTeamsPaginationAdapter;
@@ -36,7 +37,6 @@ import com.ramyhd.ramialastora.classes.responses.teams.TData;
 import com.ramyhd.ramialastora.classes.responses.teams.TeamsBody;
 import com.ramyhd.ramialastora.classes.responses.teams.TeamsData;
 import com.ramyhd.ramialastora.interfaces.Constants;
-import com.ramyhd.ramialastora.listeners.OnItemClickListener;
 import com.ramyhd.ramialastora.listeners.OnItemClickListener1;
 import com.ramyhd.ramialastora.listeners.PaginationScrollListener;
 import com.ramyhd.ramialastora.retrofit.APIClient;
@@ -105,10 +105,10 @@ public class LatestNewsFragment extends Fragment {
         ((RamiMain) getActivity()).badgeandCheckedDrawer();
     }*/
 
-    public LatestNewsFragment newInstance(NewsData newsData) {
+    public LatestNewsFragment newInstance(String newsId) {
         LatestNewsFragment fragment = new LatestNewsFragment();
         Bundle args = new Bundle();
-        args.putParcelable(Constants.newsData, newsData);
+        args.putString(Constants.newsId, newsId);
         fragment.setArguments(args);
         return fragment;
     }
@@ -117,6 +117,19 @@ public class LatestNewsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
+        if (getArguments() != null){
+            String newsId = getArguments().getString(Constants.newsId);
+            Log.d(Constants.Log+"newsId", "latest news newsId = "+newsId);
+            BACK_FRAGMENTS = 1;
+            FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity())
+                    .getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.replace(R.id.nav_host_fragment, new NewsDetailsFragment().newInstance(null, newsId));
+            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+            setArguments(null);
+        }
+
     }
 
     @Override
@@ -125,8 +138,14 @@ public class LatestNewsFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_latest_news, container, false);
 
-        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+        try {
+            ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+            ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+        }
 
         mRecyclerView = view.findViewById(R.id.newsrecyclerview);
         teamsRecyclerView = view.findViewById(R.id.teamsrecyclerview);
@@ -236,15 +255,12 @@ public class LatestNewsFragment extends Fragment {
         teamsRecyclerView.setItemAnimator(new DefaultItemAnimator());
         teamsRecyclerView.setAdapter(teamsAdapter);
 
-        teamsAdapter.setOnClickListener(new OnItemClickListener() {
-            @Override
-            public void onItemClick(TeamsData item) {
-                newsType = 2;
-                teamId = item.getTeamId();
-                loadFirstPage();
+        teamsAdapter.setOnClickListener(item -> {
+            newsType = 2;
+            teamId = item.getTeamId();
+            loadFirstPage();
 
-                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
-            }
+            MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
         });
 
         teamsLoadFirstPage();
@@ -293,22 +309,28 @@ public class LatestNewsFragment extends Fragment {
         view.setFocusableInTouchMode(true);
         view.requestFocus();
 
-        view.setOnKeyListener(new View.OnKeyListener() {
-            @Override
-            public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
-                    Log.d(Constants.Log+"back", "if( keyCode == KeyEvent.KEYCODE_BACK ) || details match details");
+        view.setOnKeyListener((v, keyCode, event) -> {
+            if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
+                Log.d(Constants.Log+"back", "if( keyCode == KeyEvent.KEYCODE_BACK ) || details match details");
+                try {
                     ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
                     ((RamiMain) getActivity()).badgeandCheckedDrawer();
                     ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
                     ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
                     ((RamiMain) getActivity()).checkMainFragmentOnDrawer();
-//                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
-                    getParentFragmentManager().popBackStack();//back one fragment
-                    return true;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
+                    ((FromNotification) getActivity()).badgeandCheckedDrawer();
+                    ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                    ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+                    ((FromNotification) getActivity()).checkMainFragmentOnDrawer();
                 }
-                return false;
+//                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
+                getParentFragmentManager().popBackStack();//back one fragment
+                return true;
             }
+            return false;
         });
         //TODO ///////////End back/////////////
 
@@ -396,7 +418,14 @@ public class LatestNewsFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 //        menu.clear();
         if (BACK_FRAGMENTS > 0) {
-            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_latest_news, "", 0);
+            try {
+                ((RamiMain) Objects.requireNonNull(getActivity()))
+                        .menuBackIcon(R.menu.toolbar_back, R.string.menu_latest_news, "", 0);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ((FromNotification) Objects.requireNonNull(getActivity()))
+                        .menuBackIcon(R.menu.toolbar_back, R.string.menu_latest_news, "", 0);
+            }
             Log.d(Constants.Log + "menu", "onCreateOptionsMenu");
             BACK_FRAGMENTS = 0;
         }
@@ -405,8 +434,9 @@ public class LatestNewsFragment extends Fragment {
 
     public void openFragmentDetails(NewsData newsData){
         BACK_FRAGMENTS = 1;
-        FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment, new NewsDetailsFragment().newInstance(newsData));
+        FragmentTransaction fragmentTransaction = Objects.requireNonNull(getActivity())
+                .getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.nav_host_fragment, new NewsDetailsFragment().newInstance(newsData, "0"));
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

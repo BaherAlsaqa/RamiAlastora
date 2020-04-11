@@ -19,9 +19,10 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.ramyhd.ramialastora.R;
-import com.ramyhd.ramialastora.RamiActivities.RamiMain;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.interfaces.Constants;
 
+import java.util.Map;
 import java.util.Objects;
 
 public class FCMService extends FirebaseMessagingService {
@@ -31,38 +32,37 @@ public class FCMService extends FirebaseMessagingService {
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(Constants.LOG+"fcm", "From: " + remoteMessage.getFrom());
+        Log.d(Constants.LOG + "fcm", "From: " + remoteMessage.getFrom());
 
         // Check if message Constants a data payload.
 
-            Log.d(Constants.LOG+"fcm", "Message data payload: " + remoteMessage.toString());
-            Log.d(Constants.LOG+"fcm", "details : " + remoteMessage.getData());
-            Object o = remoteMessage.getData().get("message");
-        Log.d(Constants.LOG+"fcm", "data details : " + remoteMessage.getData().get("details"));
-        Log.d(Constants.LOG+"fcm", "notification details : " + remoteMessage.getNotification().getBody());
-            Log.d(Constants.LOG+"fcm", "remoteMessage.getNotification()).getBody() = "
-                    + Objects.requireNonNull(remoteMessage.getNotification()).getBody());
+        Log.d(Constants.LOG + "fcm", "Message data payload: " + remoteMessage.toString());
+        Log.d(Constants.LOG + "fcm", remoteMessage.getData().toString());
+        Object o = remoteMessage.getData().get("message");
+        Log.d(Constants.LOG + "fcm", "data details : " + remoteMessage.getData().get("details"));
+        Log.d(Constants.LOG + "fcm", "notification details : " + Objects.requireNonNull(remoteMessage.getNotification()).getBody());
+        Log.d(Constants.LOG + "fcm", "remoteMessage.getNotification()).getBody() = "
+                + Objects.requireNonNull(remoteMessage.getNotification()).getBody());
 
-                Log.d(Constants.LOG+"fcm", "remoteMessage.getData().get(notificationId != null");
-                // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
+        Log.d(Constants.LOG + "fcm", "remoteMessage.getData().get(notificationId != null");
+        // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
 //                scheduleJob();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                    Log.d(Constants.LOG+"fcm", "Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT");
-                    showNotification(Objects.requireNonNull(remoteMessage.getNotification()).getTitle(),
-                            remoteMessage.getNotification().getBody(),
-                            0);
-                }else{
-                    Log.d(Constants.LOG+"fcm", "else  Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT");
-                    showNotification(Objects.requireNonNull(remoteMessage.getNotification()).getTitle(),
-                            remoteMessage.getNotification().getBody(),
-                            0);
-                }
-
-
+        Map<String, String> data = remoteMessage.getData();
+        Log.d(Constants.Log + "fcmdata", "title = " + Objects.requireNonNull(data.get("title")) +
+                " | id = " + data.get("id") +
+                " | image = " + data.get("image")+
+                " | news_id = "+data.get("news_id"));
+        Log.d(Constants.LOG + "fcm", "Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT");
+        showNotification(data.get("title"),
+                data.get("body"),
+                Integer.parseInt(Objects.requireNonNull(data.get("id"))),
+                data.get("news_id"),
+                data.get("type"),
+                data.get("image"));
 
         // Check if message Constants a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(Constants.LOG+"fcm", "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.d(Constants.LOG + "fcm", "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -70,18 +70,31 @@ public class FCMService extends FirebaseMessagingService {
     }
 
 
-    private void showNotification(String title, String message, int notifi_id) {
-        Log.d(Constants.LOG+"fcm", "showNotification");
-        Intent intent = new Intent(this, RamiMain.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
+    private void showNotification(String title, String message, int notifi_id, String newsId, String type, String Newsimage) {
+        Log.d(Constants.LOG + "fcm", "showNotification");
+        Intent intent = new Intent(this, FromNotification.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        if (newsId != null && type.equals("KEY_NEWS")) {
+            intent.putExtra("data", "from_notification");
+            intent.putExtra("newsId", newsId);
+            Log.d(Constants.Log + "newsId", "fcm newsId = " + newsId);
+        }
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-        Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), alarmSound);
-        r.play();
+        Uri alarmSound = null;
+        try {
+            alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), alarmSound);
+            r.play();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) createChannel(manager);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            assert manager != null;
+            createChannel(manager);
+        }
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "FileDownload")
                 .setAutoCancel(true)
@@ -93,14 +106,13 @@ public class FCMService extends FirebaseMessagingService {
                 .setSound(alarmSound)
                 .setPriority(NotificationCompat.PRIORITY_HIGH);
 
-        manager.notify(notifi_id, builder.build());
+        Objects.requireNonNull(manager).notify(notifi_id, builder.build());
         startForeground(1, builder.build());
-
     }
 
     @TargetApi(26)
     private void createChannel(NotificationManager notificationManager) {
-        Log.d(Constants.LOG+"fcm", "createChannel");
+        Log.d(Constants.LOG + "fcm", "createChannel");
 
         AudioAttributes attributes = new AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
@@ -117,7 +129,7 @@ public class FCMService extends FirebaseMessagingService {
         mChannel.enableLights(true);
         mChannel.setLockscreenVisibility(Notification.VISIBILITY_PRIVATE);
         mChannel.setLightColor(Color.BLUE);
-        mChannel.setSound(alarmSound,attributes);
+        mChannel.setSound(alarmSound, attributes);
         mChannel.enableVibration(true);
         notificationManager.createNotificationChannel(mChannel);
     }

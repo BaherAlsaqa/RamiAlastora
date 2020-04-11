@@ -270,7 +270,7 @@ public class TeamLatestNewsFragment extends Fragment {
     public void openFragmentDetails(NewsData newsData) {
         BACK_FRAGMENTS = 1;
         FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.nav_host_fragment, new NewsDetailsFragment().newInstance(newsData));
+        fragmentTransaction.replace(R.id.nav_host_fragment, new NewsDetailsFragment().newInstance(newsData, "0"));
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

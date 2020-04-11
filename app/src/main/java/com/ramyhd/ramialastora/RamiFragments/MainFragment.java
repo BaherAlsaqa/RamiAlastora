@@ -20,6 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.tabs.TabLayout;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
 import com.ramyhd.ramialastora.interfaces.Constants;
@@ -74,10 +75,18 @@ public class MainFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         Log.d(Constants.Log + "1", "onAttach");
-        ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_search
-                , R.string.app_name, "", 1);
-        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
-        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+        try {
+            ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_search
+                    , R.string.app_name, "", 1);
+            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+            ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_search
+                    , R.string.app_name, "", 1);
+            ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+            ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+        }
     }
 
     @Override
@@ -109,12 +118,14 @@ public class MainFragment extends Fragment {
             }
         });
 
-        clChangeDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        clChangeDate.setOnClickListener(v -> {
+            try {
                 ((RamiMain) Objects.requireNonNull(getActivity())).expandCloseSheet(0);
-                MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
+            } catch (Exception e) {
+                e.printStackTrace();
+                ((FromNotification) Objects.requireNonNull(getActivity())).expandCloseSheet(0);
             }
+            MobileAdsInterface.showInterstitialAd(interstitialAd, getContext());
         });
 
         tabLayout.setupWithViewPager(viewPager);

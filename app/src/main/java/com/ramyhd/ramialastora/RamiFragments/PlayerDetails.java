@@ -30,6 +30,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
 import com.ramyhd.ramialastora.classes.responses.players_details.ParticipatingLeague;
@@ -103,9 +104,16 @@ public class PlayerDetails extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_player_details, container, false);
 
-        ((RamiMain) getActivity()).changeToolbarBackground(R.color.white);
-        ((RamiMain) getActivity()).setLightStatusBar(view, getActivity());
-        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        try {
+            ((RamiMain) getActivity()).changeToolbarBackground(R.color.white);
+            ((RamiMain) getActivity()).setLightStatusBar(view, getActivity());
+            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) getActivity()).changeToolbarBackground(R.color.white);
+            ((FromNotification) getActivity()).setLightStatusBar(view, getActivity());
+            ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        }
 
         tabLayout = view.findViewById(R.id.tabs);
         viewPager = view.findViewById(R.id.viewpager);
@@ -157,10 +165,18 @@ public class PlayerDetails extends Fragment {
                             fragmentTransaction.commit();
                         }else {
                             Log.d(Constants.Log, "if( keyCode == KeyEvent.KEYCODE_BACK )");
-                            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
-                            ((RamiMain) getActivity()).badgeandCheckedDrawer();
-                            ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-                            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                            try {
+                                ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
+                                ((RamiMain) getActivity()).badgeandCheckedDrawer();
+                                ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                                ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
+                                ((FromNotification) getActivity()).badgeandCheckedDrawer();
+                                ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                                ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+                            }
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
                             assert getParentFragmentManager() != null;
                             getParentFragmentManager().popBackStack();//back one fragment
@@ -235,7 +251,12 @@ public class PlayerDetails extends Fragment {
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 //        menu.clear();
-        ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+        try {
+            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+        }
         super.onCreateOptionsMenu(menu, inflater);
     }
 

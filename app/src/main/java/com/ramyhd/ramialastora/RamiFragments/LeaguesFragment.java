@@ -28,6 +28,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.adapters.MyLeaguesPaginationAdapter;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
@@ -108,8 +109,14 @@ public class LeaguesFragment extends Fragment {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_leagues, container, false);
 
-        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
-        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+        try {
+            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+            ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+            ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+        }
 
         mRecyclerView = view.findViewById(R.id.recyclerview);
         swiperefresh = view.findViewById(R.id.swiperefresh);
@@ -237,11 +244,20 @@ public class LeaguesFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     Log.d(Constants.Log+"back", "if( keyCode == KeyEvent.KEYCODE_BACK ) || details match details");
-                    ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
-                    ((RamiMain) getActivity()).badgeandCheckedDrawer();
-                    ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-                    ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
-                    ((RamiMain) getActivity()).checkMainFragmentOnDrawer();
+                    try {
+                        ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
+                        ((RamiMain) getActivity()).badgeandCheckedDrawer();
+                        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                        ((RamiMain) getActivity()).checkMainFragmentOnDrawer();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_search, R.string.app_name, "", 1);
+                        ((FromNotification) getActivity()).badgeandCheckedDrawer();
+                        ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+                        ((FromNotification) getActivity()).checkMainFragmentOnDrawer();
+                    }
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
                     getParentFragmentManager().popBackStack();//back one fragment
                     return true;
@@ -491,7 +507,12 @@ public class LeaguesFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         if (BACK_FRAGMENTS > 0) {
-            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_league_sort, "", 0);
+            try {
+                ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_league_sort, "", 0);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_league_sort, "", 0);
+            }
             BACK_FRAGMENTS = 0;
         }
     }

@@ -21,6 +21,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
 import com.ramyhd.ramialastora.classes.responses.UserResp;
@@ -94,9 +95,16 @@ public class TeamDetailsFragment extends Fragment {
 
         PLAYER_OR_TEAM_NAME = teamName;
 
-        ((RamiMain) Objects.requireNonNull(getActivity())).changeToolbarBackground(R.drawable.back_team_up);
-        ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, teamName, 3);
-        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+        try {
+            ((RamiMain) Objects.requireNonNull(getActivity())).changeToolbarBackground(R.drawable.back_team_up);
+            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, teamName, 3);
+            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) Objects.requireNonNull(getActivity())).changeToolbarBackground(R.drawable.back_team_up);
+            ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, teamName, 3);
+            ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+        }
 
         tabLayout = view.findViewById(R.id.tabs);
         viewPager = view.findViewById(R.id.viewpager);

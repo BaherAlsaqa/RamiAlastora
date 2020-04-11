@@ -30,6 +30,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
 import com.ramyhd.ramialastora.classes.responses.matches.MatchData;
@@ -83,9 +84,16 @@ public class MatchDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_match_details, container, false);
 
-        ((RamiMain) Objects.requireNonNull(getActivity())).changeToolbarBackground(R.color.white);
-        RamiMain.setLightStatusBar(view, getActivity());
-        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        try {
+            ((RamiMain) Objects.requireNonNull(getActivity())).changeToolbarBackground(R.color.white);
+            RamiMain.setLightStatusBar(view, getActivity());
+            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) Objects.requireNonNull(getActivity())).changeToolbarBackground(R.color.white);
+            FromNotification.setLightStatusBar(view, getActivity());
+            ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        }
 
         tabLayout = view.findViewById(R.id.tabs);
         ViewPager viewPager = view.findViewById(R.id.viewpager);
@@ -269,11 +277,20 @@ public class MatchDetailsFragment extends Fragment {
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
                 }else {
-                    ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(
-                            R.menu.toolbar_search, R.string.app_name, "", 1);
-                    ((RamiMain) getActivity()).badgeandCheckedDrawer();
-                    ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-                    ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                    try {
+                        ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(
+                                R.menu.toolbar_search, R.string.app_name, "", 1);
+                        ((RamiMain) getActivity()).badgeandCheckedDrawer();
+                        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ((FromNotification) Objects.requireNonNull(getActivity())).menuBackIcon(
+                                R.menu.toolbar_search, R.string.app_name, "", 1);
+                        ((FromNotification) getActivity()).badgeandCheckedDrawer();
+                        ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+                    }
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
                     getParentFragmentManager().popBackStack();//back one fragment
                 }
@@ -364,7 +381,12 @@ public class MatchDetailsFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 //        menu.clear();
         if (BACK_FRAGMENTS > 0) {
-            ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            try {
+                ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ((FromNotification) Objects.requireNonNull(getActivity())).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            }
             Log.d(Constants.Log + "menu11", "onCreateOptionsMenu");
             BACK_FRAGMENTS = 0;
         }

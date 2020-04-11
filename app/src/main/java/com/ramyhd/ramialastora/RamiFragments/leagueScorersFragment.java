@@ -26,6 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.adapters.MyScorersAdapter;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
@@ -121,8 +122,14 @@ public class leagueScorersFragment extends Fragment {
                 flLeaguesList.setVisibility(View.GONE);
             }
             if (backButton != 0) {
-                ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(
-                        R.menu.toolbar_back, R.string.menu_scorer, "", 0);
+                try {
+                    ((RamiMain) Objects.requireNonNull(getActivity())).menuBackIcon(
+                            R.menu.toolbar_back, R.string.menu_scorer, "", 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ((FromNotification) Objects.requireNonNull(getActivity())).menuBackIcon(
+                            R.menu.toolbar_back, R.string.menu_scorer, "", 0);
+                }
             }
         }
 

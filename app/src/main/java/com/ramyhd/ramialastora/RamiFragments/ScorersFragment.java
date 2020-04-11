@@ -26,6 +26,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.ads.InterstitialAd;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.adapters.MyScorersAdapter;
 import com.ramyhd.ramialastora.admob.MobileAdsInterface;
@@ -221,11 +222,20 @@ public class ScorersFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     Log.d(Constants.Log+"back", "if( keyCode == KeyEvent.KEYCODE_BACK ) || details match details");
-                    ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_league_sort, "", 1);
-                    ((RamiMain) getActivity()).badgeandCheckedDrawer();
-                    ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-                    ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
-                    ((RamiMain) getActivity()).checkMainFragmentOnDrawer();
+                    try {
+                        ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_league_sort, "", 1);
+                        ((RamiMain) getActivity()).badgeandCheckedDrawer();
+                        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                        ((RamiMain) getActivity()).checkMainFragmentOnDrawer();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_league_sort, "", 1);
+                        ((FromNotification) getActivity()).badgeandCheckedDrawer();
+                        ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+                        ((FromNotification) getActivity()).checkMainFragmentOnDrawer();
+                    }
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
                     getParentFragmentManager().popBackStack();//back one fragment
                     return true;
@@ -490,7 +500,12 @@ public class ScorersFragment extends Fragment {
             backButton = getArguments().getInt(Constants.backButton);
             if (backButton != 0) {
                 Log.d(Constants.Log+"omenu", "onCreateOptionsMenu");
-                ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_scorer, "", 0);
+                try {
+                    ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_scorer, "", 0);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back, R.string.menu_scorer, "", 0);
+                }
                 backButton = 0;
             }
         }

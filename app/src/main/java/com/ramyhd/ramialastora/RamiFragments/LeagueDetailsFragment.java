@@ -27,6 +27,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.ramyhd.ramialastora.R;
+import com.ramyhd.ramialastora.RamiActivities.FromNotification;
 import com.ramyhd.ramialastora.RamiActivities.RamiMain;
 import com.ramyhd.ramialastora.classes.responses.matches.MatchData;
 import com.ramyhd.ramialastora.interfaces.Constants;
@@ -94,10 +95,18 @@ public class LeagueDetailsFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_league_details, container, false);
 
-        ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
-        ((RamiMain) getActivity()).changeToolbarBackground(R.color.white);
-        ((RamiMain) getActivity()).setLightStatusBar(view, getActivity());
-        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        try {
+            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            ((RamiMain) getActivity()).changeToolbarBackground(R.color.white);
+            ((RamiMain) getActivity()).setLightStatusBar(view, getActivity());
+            ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            ((FromNotification) getActivity()).changeToolbarBackground(R.color.white);
+            ((FromNotification) getActivity()).setLightStatusBar(view, getActivity());
+            ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu_dark);
+        }
 
         tabLayout = view.findViewById(R.id.tabs);
         ViewPager viewPager = view.findViewById(R.id.viewpager);
@@ -176,10 +185,18 @@ public class LeagueDetailsFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP) {
                     Log.d(Constants.Log + "back", "if( keyCode == KeyEvent.KEYCODE_BACK ) || details match details");
-                    ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, "", 3);
-                    ((RamiMain) getActivity()).badgeandCheckedDrawer();
-                    ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
-                    ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                    try {
+                        ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, "", 3);
+                        ((RamiMain) getActivity()).badgeandCheckedDrawer();
+                        ((RamiMain) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((RamiMain) getActivity()).drawerIcon(R.drawable.ic_menu);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, "", 3);
+                        ((FromNotification) getActivity()).badgeandCheckedDrawer();
+                        ((FromNotification) getActivity()).changeToolbarBackground(R.drawable.back_toolbar);
+                        ((FromNotification) getActivity()).drawerIcon(R.drawable.ic_menu);
+                    }
 //                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);//back on main
                     getParentFragmentManager().popBackStack();//back one fragment
                     return true;
@@ -285,11 +302,21 @@ public class LeagueDetailsFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
 //        menu.clear();
         if (BACK_FRAGMENTS > 0) {
-            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            try {
+                ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back_dark, 0, "", 2);
+            }
             Log.d(Constants.Log + "menu", "onCreateOptionsMenu");
             BACK_FRAGMENTS = 0;
         } else {
-            ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, "", 3);
+            try {
+                ((RamiMain) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, "", 3);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ((FromNotification) getActivity()).menuBackIcon(R.menu.toolbar_back, 0, "", 3);
+            }
             Log.d(Constants.Log + "menu", "BACK_FRAGMENTS = 0");
         }
         super.onCreateOptionsMenu(menu, inflater);

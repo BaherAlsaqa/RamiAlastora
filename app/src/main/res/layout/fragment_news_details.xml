@@ -26,7 +26,6 @@
                 android:layout_marginEnd="16dp"
                 android:gravity="center|start"
                 android:lines="2"
-                android:text="روبرتو كارلوس لنيمار: أي لاعب يتمنى ارتداء قميص ريال مدريد"
                 android:textColor="@color/dark_green"
                 android:textSize="@dimen/text16sp"
                 android:textStyle="bold"
@@ -43,7 +42,8 @@
                 android:src="@drawable/ic_visible_outlined"
                 android:visibility="gone"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:ignore="ContentDescription" />
 
             <com.ramyhd.ramialastora.CustomViews.CustomTextView
                 android:id="@+id/viewsvalue"
@@ -51,7 +51,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_marginTop="17dp"
-                android:text="1,600 مشاهدة"
+                android:text=""
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/text12sp"
                 android:visibility="gone"
@@ -61,13 +61,13 @@
             <ImageView
                 android:id="@+id/newsimage2"
                 android:layout_width="0dp"
-                android:layout_height="130dp"
+                android:layout_height="150dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewsvalue"
-                app:srcCompat="@drawable/news_image" />
+                tools:ignore="ContentDescription" />
 
             <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
                 android:id="@+id/newsdetails"
@@ -76,7 +76,6 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
-                android:text='وجه البرازيلي روبرتو كارلوس، أسطورة ريال مدريد، رسالة إلى مواطنه نيمار دا سيلفا، لاعب باريس سان جيرمان، الذي كان قريبًا من الرحيل عن الفريق الفرنسي الصيف المنصرم. الخ وقال كارلوس في تصريحات نقلتها صحيفة "ماركا" الإسبانية اليوم السبت: "أي لاعب يريد ارتداء قميص ريال مدريد " الخ وأضاف أسطورة الظهير الأيسر في ريال مدريد والبرازيل: "قصة نيمار انتهت الآن وعليه التركز في اللعب خلال الموسم الحالي، يجب أن يكون سعيدًا في باريس، وسيصبح الأفضل في العالم قريبًا". الخ وسئل عن أفضل 4 لاعبين في العالم من وجهة نظره في الوقت الحالي فأجاب: "ميسي ورونالدو ونيمار وكيليان مبابي هم الأفضل". الخ'
                 android:textColor="@color/gray_dark"
                 android:textSize="@dimen/text15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +100,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/newsdetails" />
+                app:layout_constraintTop_toBottomOf="@+id/newsdetails"
+                android:visibility="invisible"/>
 
             <com.ramyhd.ramialastora.CustomViews.CustomButton
                 android:id="@+id/share"
@@ -188,13 +188,15 @@
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <include
         android:id="@+id/nointernet"
         layout="@layout/no_internet_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/adView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -205,20 +207,22 @@
         layout="@layout/empty_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/nointernet"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <include
         android:id="@+id/error"
         layout="@layout/error_layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="@+id/nointernet"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"/>
 
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
