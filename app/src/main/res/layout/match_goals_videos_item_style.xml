@@ -28,7 +28,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
             android:id="@+id/videotitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

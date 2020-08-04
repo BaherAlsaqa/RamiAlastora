@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.ramyhd.ramialastora">
+    package="com.ramyhd.ramyalastora">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
-        android:name="com.ramyhd.ramialastora.utils.App"
+        android:name="com.ramyhd.ramyalastora.utils.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher2"
         android:label="@string/app_name"
@@ -19,13 +19,13 @@
         android:requestLegacyExternalStorage="true"
         tools:targetApi="q"
         android:fullBackupContent="true">
-        <activity android:name=".RamiActivities.FromNotification"
-            android:parentActivityName=".RamiActivities.RamiMain"/><!--just on forground app notification-->
-        <activity android:name="com.ramyhd.ramialastora.RamiActivities.WebViewVideo" />
-        <activity android:name="com.ramyhd.ramialastora.RamiActivities.OutLink" />
-        <activity android:name="com.ramyhd.ramialastora.RamiFragments.PlayerDetails" />
+        <activity android:name="com.ramyhd.ramyalastora.RamiActivities.FromNotification"
+            android:parentActivityName="com.ramyhd.ramyalastora.RamiActivities.RamiMain"/><!--just on forground app notification-->
+        <activity android:name="com.ramyhd.ramyalastora.RamiActivities.WebViewVideo" />
+        <activity android:name="com.ramyhd.ramyalastora.RamiActivities.OutLink" />
+        <activity android:name="com.ramyhd.ramyalastora.RamiFragments.PlayerDetails" />
         <activity
-            android:name="com.ramyhd.ramialastora.RamiActivities.SplashScreen"
+            android:name="com.ramyhd.ramyalastora.RamiActivities.SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.ramyhd.ramialastora.RamiActivities.RamiMain"
+            android:name="com.ramyhd.ramyalastora.RamiActivities.RamiMain"
             android:label="@string/app_name"
             android:screenOrientation="fullSensor"
             android:theme="@style/AppTheme.NoActionBar">
@@ -45,7 +45,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name="com.ramyhd.ramialastora.firebase.FCMService">
+        <service android:name="com.ramyhd.ramyalastora.firebase.FCMService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -53,7 +53,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-1064539523810191~2901697950"/>
+            android:value="ca-app-pub-8790840261202157~5916219319"/>
 
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"

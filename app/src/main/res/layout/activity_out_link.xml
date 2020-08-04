@@ -31,7 +31,7 @@
                 android:layout_marginBottom="@dimen/marginbottom11dp"
                 android:paddingEnd="@dimen/marginend5dp" />
 
-            <com.ramyhd.ramialastora.CustomViews.CustomTextView
+            <com.ramyhd.ramyalastora.CustomViews.CustomTextView
                 android:id="@+id/apptitle2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
-                <com.ramyhd.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramyalastora.CustomViews.CustomTextView
                     android:id="@+id/share"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -87,7 +87,7 @@
                     android:layout_marginTop="9dp"
                     android:visibility="visible" />
 
-                <com.ramyhd.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramyalastora.CustomViews.CustomTextView
                     android:id="@+id/apptitle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -110,7 +110,7 @@
                 android:layout_height="match_parent"
                 android:visibility="gone">
 
-                <com.ramyhd.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramyalastora.CustomViews.CustomTextView
                     android:id="@+id/createddate"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +139,7 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginTop="22dp" />
 
-                <com.ramyhd.ramialastora.CustomViews.CustomTextView
+                <com.ramyhd.ramyalastora.CustomViews.CustomTextView
                     android:id="@+id/createddatevalue"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/imageView10"
@@ -172,7 +172,7 @@
             android:layout_gravity="center"
             tools:context=".RamiActivities.OutLink">
 
-            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -204,7 +204,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -221,7 +221,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView3" />
 
-            <com.ramyhd.ramialastora.CustomViews.CustomButton
+            <com.ramyhd.ramyalastora.CustomViews.CustomButton
                 android:id="@+id/gotovideo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

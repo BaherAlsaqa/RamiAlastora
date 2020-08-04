@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logowithbackground" />
 
-    <com.ramyhd.ramialastora.CustomViews.CustomTitleTextView
+    <com.ramyhd.ramyalastora.CustomViews.CustomTitleTextView
         android:id="@+id/customTitleTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

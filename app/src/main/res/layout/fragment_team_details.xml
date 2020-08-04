@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
             android:id="@+id/country"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
             android:id="@+id/favoritetext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
             app:layout_constraintStart_toEndOf="@+id/teamlogo"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
             android:id="@+id/country2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -44,7 +44,7 @@
                     android:layout_height="@dimen/height20dp"
                     app:srcCompat="@drawable/league_1" />
 
-                <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+                <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                     android:id="@+id/leaguename"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
                 app:SpinKit_Color="@color/bluegreen" />
         </FrameLayout>
 
-        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
             android:id="@+id/statusvalue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -170,7 +170,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/team2" />
 
-            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                 android:id="@+id/team1name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
                 app:layout_constraintStart_toEndOf="@+id/team1image"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+            <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                 android:id="@+id/team2name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -220,7 +220,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                         android:id="@+id/timecomming"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -235,7 +235,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/livematchstatus"
                         app:layout_constraintVertical_bias="0.44" />
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomTextView
                         android:id="@+id/livematchstatus"
                         android:layout_width="@dimen/imagewidth45dp"
                         android:layout_height="@dimen/height20dp"
@@ -289,7 +289,7 @@
                         app:layout_constraintStart_toEndOf="@+id/team1result"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                         android:id="@+id/team2result"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -301,7 +301,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                         android:id="@+id/team1result"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -326,7 +326,7 @@
                         app:srcCompat="@drawable/ic_remaining_time"
                         tools:ignore="VectorDrawableCompat" />
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomTextView
                         android:id="@+id/time_underway"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -352,7 +352,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                         android:id="@+id/resultfinalteam2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -368,7 +368,7 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                         android:id="@+id/resultfinalteam1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -384,7 +384,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+                    <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
                         android:id="@+id/customBoldTextView6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

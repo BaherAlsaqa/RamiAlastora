@@ -27,7 +27,7 @@
             app:srcCompat="@drawable/ic_goals"
             tools:ignore="VectorDrawableCompat" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
             android:id="@+id/customBoldTextView15"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
             android:id="@+id/customBoldTextView16"
             android:layout_width="@dimen/imagewidthheight30dp"
             android:layout_height="@dimen/imagewidthheight30dp"

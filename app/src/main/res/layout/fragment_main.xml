@@ -27,7 +27,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomTextView
             android:id="@+id/customTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
             app:layout_constraintStart_toEndOf="@+id/customTextView"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomTextView
             android:id="@+id/matchdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.ramyhd.ramialastora.CustomViews.CustomTextView
+        <com.ramyhd.ramyalastora.CustomViews.CustomTextView
             android:id="@+id/returndate"
             android:layout_width="@dimen/widthheight30dp"
             android:layout_height="@dimen/widthheight30dp"

@@ -29,7 +29,7 @@
         app:srcCompat="@drawable/ic_notification_time"
         tools:ignore="VectorDrawableCompat" />
 
-    <com.ramyhd.ramialastora.CustomViews.CustomTextView
+    <com.ramyhd.ramyalastora.CustomViews.CustomTextView
         android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
         app:layout_constraintStart_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toBottomOf="@+id/newsimage" />
 
-    <com.ramyhd.ramialastora.CustomViews.CustomBoldTextView
+    <com.ramyhd.ramyalastora.CustomViews.CustomBoldTextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
